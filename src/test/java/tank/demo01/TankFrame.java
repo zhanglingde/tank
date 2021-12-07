@@ -1,7 +1,8 @@
-package tank;
+package tank.demo01;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import tank.demo02.Dir;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -21,6 +22,7 @@ public class TankFrame extends Frame {
 
     private int x = 200;
     private int y = 200;
+
 
     public TankFrame(){
         setTitle("tank war");
@@ -51,8 +53,8 @@ public class TankFrame extends Frame {
         g.setColor(Color.BLACK);
         g.drawString("数量", 30, 100);
         g.fillRect(x, y, 50, 60);
-        x += 10;
-        y += 10;
+//        x += 10;
+//        y += 10;
         g.setColor(color);
     }
 

@@ -1,4 +1,4 @@
-package tank;
+package tank.demo01;
 
 import java.awt.*;
 import java.awt.event.WindowAdapter;

@@ -1,6 +1,7 @@
-package tank;
+package tank.demo01;
 
 /**
+ * {@link tank.demo01.TankFrame}
  * @author zhangling
  * @date 2021/12/6 4:16 下午
  */
