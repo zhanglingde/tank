@@ -54,8 +54,10 @@ public class TankFrame extends Frame {
         g.setColor(Color.WHITE);
         g.drawString("数量:" + bullets.size(), 30, 100);
         myTank.paint(g);
-        for (Bullet bullet : bullets) {
-            bullet.paint(g);
+        if (bullets != null && bullets.size() != 0) {
+            for (Bullet bullet : bullets) {
+                bullet.paint(g);
+            }
         }
     }
 

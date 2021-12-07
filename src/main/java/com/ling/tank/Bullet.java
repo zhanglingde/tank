@@ -15,12 +15,15 @@ public class Bullet {
     private int WIDTH = 30;
     private int HEIGHT = 30;
     private Dir dir;
+    private boolean live = true;
     private static final int SPEED = 10;
+    private TankFrame tf;
 
-    public Bullet(int x, int y, Dir dir) {
+    public Bullet(int x, int y, Dir dir,TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.tf = tf;
     }
 
     public void paint(Graphics g) {
@@ -29,6 +32,9 @@ public class Bullet {
         g.fillOval(x, y, WIDTH, HEIGHT);
 
         move();
+        if (!live) {
+            tf.getBullets().remove(this);
+        }
     }
 
     private void move() {
@@ -45,6 +51,9 @@ public class Bullet {
             case DOWN:
                 y += SPEED;
                 break;
+        }
+        if (x < 0 || x > tf.getWidth() || y < 0 || y > tf.getHeight()) {
+            live = false;
         }
     }
 }

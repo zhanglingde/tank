@@ -32,7 +32,6 @@ public class Tank {
     private static final int SPEED = 10;
 
 
-
     public Tank(int x, int y, Dir dir, TankFrame tf) {
         this.x = x;
         this.y = y;
@@ -78,6 +77,6 @@ public class Tank {
      */
     public void fire() {
         System.out.println("fire");
-        tf.getBullets().add(new Bullet(this.x, this.y, dir));
+        tf.getBullets().add(new Bullet(this.x, this.y, dir, tf));
     }
 }
