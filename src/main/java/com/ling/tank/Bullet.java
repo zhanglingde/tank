@@ -15,7 +15,7 @@ public class Bullet {
     private int WIDTH = 30;
     private int HEIGHT = 30;
     private Dir dir;
-    private static final int SPEED = 3;
+    private static final int SPEED = 10;
 
     public Bullet(int x, int y, Dir dir) {
         this.x = x;

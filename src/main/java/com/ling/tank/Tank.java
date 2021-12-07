@@ -2,6 +2,7 @@ package com.ling.tank;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
@@ -14,9 +15,6 @@ import java.awt.*;
  * @date 2021/12/7 11:22 上午
  */
 @Data
-@Accessors(chain = true)
-@AllArgsConstructor
-@NoArgsConstructor
 public class Tank {
 
     // 初始位置
@@ -26,13 +24,20 @@ public class Tank {
      * 设置默认方向向下
      */
     private Dir dir = Dir.DOWN;
+    /**
+     * 维持一个 TankFrame 的引用，tank 需要在 TankFrame 中创建一个子弹
+     */
+    private TankFrame tf;
     private boolean moving = false;
     private static final int SPEED = 10;
 
-    public Tank(int x, int y, Dir dir) {
+
+
+    public Tank(int x, int y, Dir dir, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.tf = tf;
     }
 
     /**
@@ -66,5 +71,13 @@ public class Tank {
                     break;
             }
         }
+    }
+
+    /**
+     * 坦克开火
+     */
+    public void fire() {
+        System.out.println("fire");
+        tf.getBullets().add(new Bullet(this.x, this.y, dir));
     }
 }

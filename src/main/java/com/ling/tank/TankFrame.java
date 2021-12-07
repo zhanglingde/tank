@@ -1,13 +1,14 @@
 package com.ling.tank;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.*;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 游戏界面类
@@ -15,12 +16,15 @@ import java.awt.event.WindowEvent;
  * @author zhangling
  * @date 2021/12/6 4:08 下午
  */
-@Data
-@AllArgsConstructor
+// @Data  注解会报错
+@Getter
+@Setter
 public class TankFrame extends Frame {
     private static final int GAME_WIDTH = 1000, GAME_HEIGHT = 800;
-    Tank myTank = new Tank(200, 200, Dir.DOWN);
-    Bullet bullet = new Bullet(300, 300, Dir.DOWN);
+    Tank myTank = new Tank(200, 200, Dir.DOWN, this);
+    // Bullet bullet = new Bullet(300, 300, Dir.DOWN);
+    List<Bullet> bullets = new ArrayList<Bullet>();
+
 
     public TankFrame() {
         setTitle("tank war");
@@ -46,30 +50,34 @@ public class TankFrame extends Frame {
      */
     @Override
     public void paint(Graphics g) {
-        g.setColor(Color.BLACK);
-        g.drawString("数量", 30, 100);
+
+        g.setColor(Color.WHITE);
+        g.drawString("数量:" + bullets.size(), 30, 100);
         myTank.paint(g);
-        bullet.paint(g);
+        for (Bullet bullet : bullets) {
+            bullet.paint(g);
+        }
     }
 
     Image offScreenImage = null;
 
     /**
      * 添加双缓冲，解决界面闪烁问题（添加后界面会变黑）
+     *
      * @param g
      */
     @Override
     public void update(Graphics g) {
-        if(offScreenImage == null){
-            offScreenImage = this.createImage(GAME_WIDTH,GAME_HEIGHT);
+        if (offScreenImage == null) {
+            offScreenImage = this.createImage(GAME_WIDTH, GAME_HEIGHT);
         }
         Graphics gOffScreen = offScreenImage.getGraphics();
         Color c = gOffScreen.getColor();
         gOffScreen.setColor(Color.BLACK);
-        gOffScreen.fillRect(0,0,GAME_WIDTH,GAME_HEIGHT);
+        gOffScreen.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
         gOffScreen.setColor(c);
         paint(gOffScreen);
-        g.drawImage(offScreenImage,0,0,null);
+        g.drawImage(offScreenImage, 0, 0, null);
 
     }
 
@@ -99,6 +107,11 @@ public class TankFrame extends Frame {
                     break;
                 case KeyEvent.VK_DOWN:
                     bD = true;
+                    break;
+                case KeyEvent.VK_CONTROL:
+                    myTank.fire();
+                    break;
+                default:
                     break;
 
             }
