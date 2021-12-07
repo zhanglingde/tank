@@ -24,7 +24,7 @@ public class Bullet {
     }
 
     public void paint(Graphics g) {
-        g.setColor(Color.black);
+        g.setColor(Color.RED);
         // 绘制一个圆
         g.fillOval(x, y, WIDTH, HEIGHT);
 

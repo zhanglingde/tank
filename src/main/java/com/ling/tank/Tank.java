@@ -29,14 +29,20 @@ public class Tank {
     private boolean moving = false;
     private static final int SPEED = 10;
 
+    public Tank(int x, int y, Dir dir) {
+        this.x = x;
+        this.y = y;
+        this.dir = dir;
+    }
+
     /**
      * 绘制坦克
      *
      * @param g
      */
     public void paint(Graphics g) {
+        g.setColor(Color.YELLOW);
         g.fillRect(x, y, 50, 60);
-
         move();
     }
 

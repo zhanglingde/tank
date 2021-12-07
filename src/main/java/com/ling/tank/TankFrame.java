@@ -10,7 +10,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 /**
- * 画一个移动的图形
+ * 游戏界面类
  *
  * @author zhangling
  * @date 2021/12/6 4:08 下午
@@ -18,16 +18,13 @@ import java.awt.event.WindowEvent;
 @Data
 @AllArgsConstructor
 public class TankFrame extends Frame {
-
-    Tank myTank = new Tank()
-            .setX(200)
-            .setY(200)
-            .setDir(Dir.DOWN);
+    private static final int GAME_WIDTH = 1000, GAME_HEIGHT = 800;
+    Tank myTank = new Tank(200, 200, Dir.DOWN);
     Bullet bullet = new Bullet(300, 300, Dir.DOWN);
 
     public TankFrame() {
         setTitle("tank war");
-        setSize(1000, 800);
+        setSize(GAME_WIDTH, GAME_HEIGHT);
         setVisible(true);
         setResizable(false);
 
@@ -53,6 +50,27 @@ public class TankFrame extends Frame {
         g.drawString("数量", 30, 100);
         myTank.paint(g);
         bullet.paint(g);
+    }
+
+    Image offScreenImage = null;
+
+    /**
+     * 添加双缓冲，解决界面闪烁问题（添加后界面会变黑）
+     * @param g
+     */
+    @Override
+    public void update(Graphics g) {
+        if(offScreenImage == null){
+            offScreenImage = this.createImage(GAME_WIDTH,GAME_HEIGHT);
+        }
+        Graphics gOffScreen = offScreenImage.getGraphics();
+        Color c = gOffScreen.getColor();
+        gOffScreen.setColor(Color.BLACK);
+        gOffScreen.fillRect(0,0,GAME_WIDTH,GAME_HEIGHT);
+        gOffScreen.setColor(c);
+        paint(gOffScreen);
+        g.drawImage(offScreenImage,0,0,null);
+
     }
 
     /**
