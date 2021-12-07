@@ -3,15 +3,18 @@ package com.ling.tank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 import java.awt.*;
 
 /**
  * 坦克实体
+ *
  * @author zhangling
  * @date 2021/12/7 11:22 上午
  */
 @Data
+@Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class Tank {
@@ -23,28 +26,39 @@ public class Tank {
      * 设置默认方向向下
      */
     private Dir dir = Dir.DOWN;
+    private boolean moving = false;
     private static final int SPEED = 10;
 
     /**
      * 绘制坦克
+     *
      * @param g
      */
     public void paint(Graphics g) {
         g.fillRect(x, y, 50, 60);
 
-        switch (dir) {
-            case LEFT:
-                x -= SPEED;
-                break;
-            case UP:
-                y -= SPEED;
-                break;
-            case RIGHT:
-                x += SPEED;
-                break;
-            case DOWN:
-                y += SPEED;
-                break;
+        move();
+    }
+
+    /**
+     * 坦克移动
+     */
+    private void move() {
+        if (moving) {
+            switch (dir) {
+                case LEFT:
+                    x -= SPEED;
+                    break;
+                case UP:
+                    y -= SPEED;
+                    break;
+                case RIGHT:
+                    x += SPEED;
+                    break;
+                case DOWN:
+                    y += SPEED;
+                    break;
+            }
         }
     }
 }

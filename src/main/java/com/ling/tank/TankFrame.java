@@ -19,7 +19,11 @@ import java.awt.event.WindowEvent;
 @AllArgsConstructor
 public class TankFrame extends Frame {
 
-    Tank myTank = new Tank(200, 200, Dir.DOWN);
+    Tank myTank = new Tank()
+            .setX(200)
+            .setY(200)
+            .setDir(Dir.DOWN);
+    Bullet bullet = new Bullet(300, 300, Dir.DOWN);
 
     public TankFrame() {
         setTitle("tank war");
@@ -48,6 +52,7 @@ public class TankFrame extends Frame {
         g.setColor(Color.BLACK);
         g.drawString("数量", 30, 100);
         myTank.paint(g);
+        bullet.paint(g);
     }
 
     /**
@@ -109,17 +114,24 @@ public class TankFrame extends Frame {
          * 设置坦克方向
          */
         private void setTankDir() {
-            if (bL) {
-                myTank.setDir(Dir.LEFT);
-            }
-            if (bU) {
-                myTank.setDir(Dir.UP);
-            }
-            if (bR) {
-                myTank.setDir(Dir.RIGHT);
-            }
-            if (bD) {
-                myTank.setDir(Dir.DOWN);
+            // 只要有一个方向就移动
+            if (!(bL || bU || bD || bR)) {
+                myTank.setMoving(false);
+            } else {
+                myTank.setMoving(true);
+
+                if (bL) {
+                    myTank.setDir(Dir.LEFT);
+                }
+                if (bU) {
+                    myTank.setDir(Dir.UP);
+                }
+                if (bR) {
+                    myTank.setDir(Dir.RIGHT);
+                }
+                if (bD) {
+                    myTank.setDir(Dir.DOWN);
+                }
             }
         }
     }

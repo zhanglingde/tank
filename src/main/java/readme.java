@@ -1,4 +1,6 @@
 
 /**
- * 1. 实现方块的方向移动 {@link tank.demo01.TankFrame}
+ * 3. 抽象出坦克类，并封装相应的属性 {@link com.ling.tank.Tank}
+ * 4. 坦克增加静止属性
+ * 5. 添加子弹类，并在界面上绘制出来 {@link com.ling.tank.Bullet}
  */
