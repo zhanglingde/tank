@@ -1,5 +1,6 @@
 package com.ling.tank;
 
+import com.ling.util.ResourceMgr;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -20,6 +21,8 @@ public class Tank {
     // 初始位置
     private int x = 200;
     private int y = 200;
+    private static int WIDTH = ResourceMgr.tankU.getWidth();
+    private static int HEIGHT = ResourceMgr.tankU.getHeight();
     /**
      * 设置默认方向向下
      */
@@ -45,8 +48,24 @@ public class Tank {
      * @param g
      */
     public void paint(Graphics g) {
-        g.setColor(Color.YELLOW);
-        g.fillRect(x, y, 50, 60);
+        // g.setColor(Color.YELLOW);
+        // g.fillRect(x, y, WIDTH, HEIGHT);
+        switch (dir) {
+            case LEFT:
+                g.drawImage(ResourceMgr.tankL, x, y, null);
+                break;
+            case UP:
+                g.drawImage(ResourceMgr.tankU, x, y, null);
+                break;
+            case RIGHT:
+                g.drawImage(ResourceMgr.tankR, x, y, null);
+                break;
+            case DOWN:
+                g.drawImage(ResourceMgr.tankD, x, y, null);
+                break;
+            default:
+                break;
+        }
         move();
     }
 
@@ -76,7 +95,8 @@ public class Tank {
      * 坦克开火
      */
     public void fire() {
-        System.out.println("fire");
-        tf.getBullets().add(new Bullet(this.x, this.y, dir, tf));
+        int bX = x + Tank.WIDTH / 2 - Bullet.HEIGHT / 2;
+        int bY = y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
+        tf.getBullets().add(new Bullet(bX, bY, dir, tf));
     }
 }

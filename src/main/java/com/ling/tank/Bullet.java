@@ -1,5 +1,6 @@
 package com.ling.tank;
 
+import com.ling.util.ResourceMgr;
 import lombok.Data;
 
 import java.awt.*;
@@ -12,14 +13,14 @@ import java.awt.*;
 public class Bullet {
 
     private int x, y;
-    private int WIDTH = 30;
-    private int HEIGHT = 30;
+    public static int WIDTH = ResourceMgr.buffetU.getWidth();
+    public static int HEIGHT = ResourceMgr.buffetU.getHeight();
     private Dir dir;
     private boolean live = true;
     private static final int SPEED = 10;
     private TankFrame tf;
 
-    public Bullet(int x, int y, Dir dir,TankFrame tf) {
+    public Bullet(int x, int y, Dir dir, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -27,9 +28,25 @@ public class Bullet {
     }
 
     public void paint(Graphics g) {
-        g.setColor(Color.RED);
-        // 绘制一个圆
-        g.fillOval(x, y, WIDTH, HEIGHT);
+        // g.setColor(Color.RED);
+        // // 绘制一个圆
+        // g.fillOval(x, y, WIDTH, HEIGHT);
+        switch (dir) {
+            case LEFT:
+                g.drawImage(ResourceMgr.buffetL, x, y, null);
+                break;
+            case UP:
+                g.drawImage(ResourceMgr.buffetU, x, y, null);
+                break;
+            case RIGHT:
+                g.drawImage(ResourceMgr.buffetR, x, y, null);
+                break;
+            case DOWN:
+                g.drawImage(ResourceMgr.buffetD, x, y, null);
+                break;
+            default:
+                break;
+        }
 
         move();
         if (!live) {

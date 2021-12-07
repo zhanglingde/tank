@@ -54,11 +54,14 @@ public class TankFrame extends Frame {
         g.setColor(Color.WHITE);
         g.drawString("数量:" + bullets.size(), 30, 100);
         myTank.paint(g);
-        if (bullets != null && bullets.size() != 0) {
-            for (Bullet bullet : bullets) {
-                bullet.paint(g);
-            }
+        for (int i = 0; i < bullets.size(); i++) {   // 使用增强 for 循环会报错
+            bullets.get(i).paint(g);
         }
+        // if (bullets != null && bullets.size() != 0) {
+        //     for (Bullet bullet : bullets) {
+        //         bullet.paint(g);
+        //     }
+        // }
     }
 
     Image offScreenImage = null;
