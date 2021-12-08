@@ -11,6 +11,7 @@
  * 12. 子弹碰到敌方坦克，增加碰撞检测；遍历子弹和敌方坦克集合，如果碰撞，两个都死   {@link com.ling.tank.Bullet#collideWith(com.ling.tank.Tank)}
  * 13. 加入 Group 区分阵营，敌方坦克随机发射子弹 (test02 分支)          {@link com.ling.tank.TankFrame#paint(java.awt.Graphics)}
  * 14. 加入爆炸        {@link com.ling.tank.Explode}
+ * 15. 加入声音（音频文件在资源区无效）
  */
 
 
