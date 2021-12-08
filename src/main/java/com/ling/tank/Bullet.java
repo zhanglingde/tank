@@ -31,6 +31,10 @@ public class Bullet {
         // g.setColor(Color.RED);
         // // 绘制一个圆
         // g.fillOval(x, y, WIDTH, HEIGHT);
+        if (!live) {
+            tf.getBullets().remove(this);
+            return;
+        }
         switch (dir) {
             case LEFT:
                 g.drawImage(ResourceMgr.buffetL, x, y, null);
@@ -49,9 +53,7 @@ public class Bullet {
         }
 
         move();
-        if (!live) {
-            tf.getBullets().remove(this);
-        }
+
     }
 
     private void move() {
@@ -72,5 +74,22 @@ public class Bullet {
         if (x < 0 || x > tf.getWidth() || y < 0 || y > tf.getHeight()) {
             live = false;
         }
+    }
+
+    /**
+     * 子弹碰撞坦克，
+     * @param tank
+     */
+    public void collideWith(Tank tank) {
+        Rectangle rect1 = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
+        Rectangle rect2 = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
+        if (rect1.intersects(rect2)) {
+            this.die();
+            tank.die();
+        }
+    }
+
+    private void die() {
+        this.live = false;
     }
 }

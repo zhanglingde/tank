@@ -54,6 +54,7 @@ public class TankFrame extends Frame {
 
         g.setColor(Color.WHITE);
         g.drawString("数量:" + bullets.size(), 30, 100);
+        g.drawString("敌方坦克:" + badTanks.size(), 30, 130);
         myTank.paint(g);
         for (int i = 0; i < bullets.size(); i++) {   // 使用增强 for 循环会报错
             bullets.get(i).paint(g);
@@ -61,11 +62,12 @@ public class TankFrame extends Frame {
         for (int i = 0; i < badTanks.size(); i++) {
             badTanks.get(i).paint(g);
         }
-        // if (bullets != null && bullets.size() != 0) {
-        //     for (Bullet bullet : bullets) {
-        //         bullet.paint(g);
-        //     }
-        // }
+        // 循环遍历子弹和敌方坦克，如果碰撞，两个都移除
+        for (int i = 0; i < bullets.size(); i++) {
+            for (int j = 0; j < badTanks.size(); j++) {
+                bullets.get(i).collideWith(badTanks.get(j));
+            }
+        }
     }
 
     Image offScreenImage = null;

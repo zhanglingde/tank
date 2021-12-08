@@ -1,10 +1,7 @@
 package com.ling.tank;
 
 import com.ling.util.ResourceMgr;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.Accessors;
 
 import java.awt.*;
@@ -15,14 +12,15 @@ import java.awt.*;
  * @author zhangling
  * @date 2021/12/7 11:22 上午
  */
-@Data
+@Getter
+@Setter
 public class Tank {
 
     // 初始位置
     private int x = 200;
     private int y = 200;
-    private static int WIDTH = ResourceMgr.tankU.getWidth();
-    private static int HEIGHT = ResourceMgr.tankU.getHeight();
+    public static int WIDTH = ResourceMgr.tankU.getWidth();
+    public static int HEIGHT = ResourceMgr.tankU.getHeight();
     /**
      * 设置默认方向向下
      */
@@ -32,6 +30,7 @@ public class Tank {
      */
     private TankFrame tf;
     private boolean moving = false;
+    private boolean live = true;
     private static final int SPEED = 10;
 
 
@@ -50,6 +49,10 @@ public class Tank {
     public void paint(Graphics g) {
         // g.setColor(Color.YELLOW);
         // g.fillRect(x, y, WIDTH, HEIGHT);
+        if (!live) {
+            tf.getBadTanks().remove(this);
+            return;
+        }
         switch (dir) {
             case LEFT:
                 g.drawImage(ResourceMgr.tankL, x, y, null);
@@ -98,5 +101,9 @@ public class Tank {
         int bX = x + Tank.WIDTH / 2 - Bullet.HEIGHT / 2;
         int bY = y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
         tf.getBullets().add(new Bullet(bX, bY, dir, tf));
+    }
+
+    public void die() {
+        this.live = false;
     }
 }
