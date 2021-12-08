@@ -21,10 +21,10 @@ import java.util.List;
 @Setter
 public class TankFrame extends Frame {
     private static final int GAME_WIDTH = 1000, GAME_HEIGHT = 800;
-    Tank myTank = new Tank(200, 400, Dir.UP, this);
+    private Tank myTank = new Tank(600, 400, Dir.UP, Group.GOOD, this);
     // Bullet bullet = new Bullet(300, 300, Dir.DOWN);
-    List<Bullet> bullets = new ArrayList<Bullet>();
-    List<Tank> badTanks = new ArrayList<>();
+    private List<Bullet> bullets = new ArrayList<Bullet>();
+    private List<Tank> badTanks = new ArrayList<>();
 
 
     public TankFrame() {
@@ -55,7 +55,9 @@ public class TankFrame extends Frame {
         g.setColor(Color.WHITE);
         g.drawString("数量:" + bullets.size(), 30, 100);
         g.drawString("敌方坦克:" + badTanks.size(), 30, 130);
-        myTank.paint(g);
+        if (myTank != null) {
+            myTank.paint(g);
+        }
         for (int i = 0; i < bullets.size(); i++) {   // 使用增强 for 循环会报错
             bullets.get(i).paint(g);
         }
@@ -64,8 +66,13 @@ public class TankFrame extends Frame {
         }
         // 循环遍历子弹和敌方坦克，如果碰撞，两个都移除
         for (int i = 0; i < bullets.size(); i++) {
-            for (int j = 0; j < badTanks.size(); j++) {
-                bullets.get(i).collideWith(badTanks.get(j));
+            // 敌方子弹和我方坦克碰撞
+            if (bullets.get(i).getGroup() == Group.BAD) {
+                bullets.get(i).collideWith(myTank);
+            } else {
+                for (int j = 0; j < badTanks.size(); j++) {
+                    bullets.get(i).collideWith(badTanks.get(j));
+                }
             }
         }
     }
@@ -83,10 +90,8 @@ public class TankFrame extends Frame {
             offScreenImage = this.createImage(GAME_WIDTH, GAME_HEIGHT);
         }
         Graphics gOffScreen = offScreenImage.getGraphics();
-        Color c = gOffScreen.getColor();
         gOffScreen.setColor(Color.BLACK);
         gOffScreen.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
-        gOffScreen.setColor(c);
         paint(gOffScreen);
         g.drawImage(offScreenImage, 0, 0, null);
 

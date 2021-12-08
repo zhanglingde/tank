@@ -5,6 +5,7 @@ import lombok.*;
 import lombok.experimental.Accessors;
 
 import java.awt.*;
+import java.util.Random;
 
 /**
  * 坦克实体
@@ -31,13 +32,16 @@ public class Tank {
     private TankFrame tf;
     private boolean moving = false;
     private boolean live = true;
+    private Group group;
+    Random random = new Random();
     private static final int SPEED = 10;
 
 
-    public Tank(int x, int y, Dir dir, TankFrame tf) {
+    public Tank(int x, int y, Dir dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.group = group;
         this.tf = tf;
     }
 
@@ -49,8 +53,15 @@ public class Tank {
     public void paint(Graphics g) {
         // g.setColor(Color.YELLOW);
         // g.fillRect(x, y, WIDTH, HEIGHT);
+
+
         if (!live) {
-            tf.getBadTanks().remove(this);
+            if (group == Group.BAD) {
+                tf.getBadTanks().remove(this);
+            } else {
+                tf.setMyTank(null);
+            }
+
             return;
         }
         switch (dir) {
@@ -92,6 +103,10 @@ public class Tank {
                     break;
             }
         }
+
+        if (group == Group.BAD && random.nextInt(10) > 8) {
+            this.fire();
+        }
     }
 
     /**
@@ -100,7 +115,7 @@ public class Tank {
     public void fire() {
         int bX = x + Tank.WIDTH / 2 - Bullet.HEIGHT / 2;
         int bY = y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
-        tf.getBullets().add(new Bullet(bX, bY, dir, tf));
+        tf.getBullets().add(new Bullet(bX, bY, dir, this.group, tf));
     }
 
     public void die() {

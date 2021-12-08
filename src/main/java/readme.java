@@ -9,6 +9,7 @@
  * 10. 将坦克，子弹用图片替换（读取图片，直接画图片），修改子弹到正确位置，相对于最左上角的相对位置
  * 11. 初始化敌方坦克
  * 12. 子弹碰到敌方坦克，增加碰撞检测；遍历子弹和敌方坦克集合，如果碰撞，两个都死   {@link com.ling.tank.Bullet#collideWith(com.ling.tank.Tank)}
+ * 13. 加入 Group 区分阵营，敌方坦克随机发射子弹           {@link com.ling.tank.TankFrame#paint(java.awt.Graphics)}
  */
 
 
@@ -16,4 +17,5 @@
 /**
  * 分支
  * 1. test1：子弹碰撞敌方坦克闪烁
+ * 2. test02：敌方子弹和我方坦克碰撞异常
  */
