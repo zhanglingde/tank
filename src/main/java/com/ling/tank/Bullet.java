@@ -20,13 +20,19 @@ public class Bullet {
     private Group group;
     private static final int SPEED = 10;
     private TankFrame tf;
+    private Rectangle rect = new Rectangle();
 
-    public Bullet(int x, int y, Dir dir,Group group, TankFrame tf) {
+    public Bullet(int x, int y, Dir dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
         this.tf = tf;
+
+        rect.x = x;
+        rect.y = y;
+        rect.width = WIDTH;
+        rect.height = HEIGHT;
     }
 
     public void paint(Graphics g) {
@@ -73,6 +79,8 @@ public class Bullet {
                 y += SPEED;
                 break;
         }
+        rect.x = x;
+        rect.y = y;
         if (x < 0 || x > tf.getWidth() || y < 0 || y > tf.getHeight()) {
             live = false;
         }
@@ -80,6 +88,7 @@ public class Bullet {
 
     /**
      * 子弹碰撞坦克，
+     *
      * @param tank
      */
     public void collideWith(Tank tank) {
@@ -87,15 +96,15 @@ public class Bullet {
             return;
         }
         // todo 用一个 rect 来记录子弹的位置（单例模式）
-        Rectangle rect1 = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
-        Rectangle rect2 = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
-        if (rect1.intersects(rect2)) {
+        // Rectangle rect1 = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
+        // Rectangle rect2 = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
+        if (rect.intersects(tank.getRect())) {
             this.die();
             tank.die();
             // 计算爆炸的位置
             int eX = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
             int eY = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
-            tf.getExplodes().add(new Explode(eX,eY,tf));
+            tf.getExplodes().add(new Explode(eX, eY, tf));
         }
     }
 

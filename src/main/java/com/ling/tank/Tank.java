@@ -3,6 +3,7 @@ package com.ling.tank;
 import com.ling.util.ResourceMgr;
 import lombok.*;
 import lombok.experimental.Accessors;
+import org.w3c.dom.css.Rect;
 
 import java.awt.*;
 import java.util.Random;
@@ -35,6 +36,7 @@ public class Tank {
     private Group group;
     Random random = new Random();
     private static final int SPEED = 5;
+    private Rectangle rect = new Rectangle();
 
 
     public Tank(int x, int y, Dir dir, Group group, TankFrame tf) {
@@ -43,6 +45,11 @@ public class Tank {
         this.dir = dir;
         this.group = group;
         this.tf = tf;
+
+        rect.x = x;
+        rect.y = y;
+        rect.width = WIDTH;
+        rect.height = HEIGHT;
     }
 
     /**
@@ -102,6 +109,9 @@ public class Tank {
                     y += SPEED;
                     break;
             }
+
+            rect.x = x;
+            rect.y = y;
         }
 
         if (group == Group.BAD && random.nextInt(100) > 95) {
