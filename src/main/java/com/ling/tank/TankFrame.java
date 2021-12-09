@@ -1,5 +1,9 @@
 package com.ling.tank;
 
+import com.ling.strategy.DefaultFireStrategy;
+import com.ling.strategy.FireStrategy;
+import com.ling.strategy.FourDirFireStrategy;
+import com.ling.strategy.TwoBulletFireStrategy;
 import lombok.*;
 
 import java.awt.*;
@@ -26,6 +30,8 @@ public class TankFrame extends Frame {
     private List<Tank> badTanks = new ArrayList<>();
     // private Explode explode = new Explode(100, 100, this);
     private List<Explode> explodes = new ArrayList<>();
+
+    FireStrategy fireStrategy = new FourDirFireStrategy();
 
 
     public TankFrame() {
@@ -131,7 +137,7 @@ public class TankFrame extends Frame {
                     bD = true;
                     break;
                 case KeyEvent.VK_CONTROL:
-                    myTank.fire();
+                    fireStrategy.fire(myTank);
                     break;
                 default:
                     break;

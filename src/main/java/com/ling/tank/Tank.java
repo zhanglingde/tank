@@ -39,6 +39,7 @@ public class Tank {
     private Rectangle rect = new Rectangle();
 
 
+
     public Tank(int x, int y, Dir dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;

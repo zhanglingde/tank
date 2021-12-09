@@ -16,6 +16,12 @@
  * 17. 坦克增加边界检测，敌方坦克随机移动            {@link com.ling.tank.Tank#boundsCheck()}
  * 18. 修复碰撞检测时产生多个 rect问题，在子弹和坦克中都维护一个 rect，随着子弹和坦克的移动更新 rect
  * 19. 添加配置文件，移除敌方坦克初始化，为网络版作准备
+ * 
+ */
+
+/**
+ * 设计模式：
+ * 1. 策略模式 {@link com.ling.strategy.FireStrategy#fire(com.ling.tank.Tank)}
  */
 
 
@@ -24,4 +30,7 @@
  * 分支
  * 1. test1：子弹碰撞敌方坦克闪烁
  * 2. test02：敌方子弹和我方坦克碰撞异常
+ * net:网络版
+ * dp：设计模式版
+ *
  */
