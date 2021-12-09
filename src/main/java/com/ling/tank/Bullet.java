@@ -20,6 +20,9 @@ public class Bullet {
     private Group group;
     private static final int SPEED = 10;
     private TankFrame tf;
+    /**
+     * rect可以想象成一个矩形，记录边框位置，做碰撞检测
+     */
     private Rectangle rect = new Rectangle();
 
     public Bullet(int x, int y, Dir dir, Group group, TankFrame tf) {
