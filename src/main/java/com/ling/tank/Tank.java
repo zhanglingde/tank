@@ -34,7 +34,7 @@ public class Tank {
     private boolean live = true;
     private Group group;
     Random random = new Random();
-    private static final int SPEED = 10;
+    private static final int SPEED = 5;
 
 
     public Tank(int x, int y, Dir dir, Group group, TankFrame tf) {
@@ -107,6 +107,34 @@ public class Tank {
         if (group == Group.BAD && random.nextInt(100) > 95) {
             this.fire();
         }
+        //
+        // if (group == Group.BAD && random.nextInt(100) > 95) {
+        //     randomDir();
+        // }
+
+        // 遍界检测
+        boundsCheck();
+    }
+
+    private void boundsCheck() {
+        if (x < 2) {
+            x = 2;
+        }
+        if (x > TankFrame.GAME_WIDTH - Tank.WIDTH - 2) {
+            x = TankFrame.GAME_WIDTH - Tank.WIDTH - 2;
+        }
+        if (y < 30) {
+            // 菜单栏高度为 30
+            y = 30;
+        }
+        if (y > TankFrame.GAME_HEIGHT - Tank.HEIGHT) {
+            y = TankFrame.GAME_HEIGHT - Tank.HEIGHT;
+        }
+    }
+
+    private void randomDir() {
+        // 从方向枚举数组的4个方向中，随机取一个方向的下标
+        this.dir = Dir.values()[random.nextInt(4)];
     }
 
     /**

@@ -20,7 +20,7 @@ import java.util.List;
 @Getter
 @Setter
 public class TankFrame extends Frame {
-    private static final int GAME_WIDTH = 1000, GAME_HEIGHT = 800;
+    public static final int GAME_WIDTH = 1000, GAME_HEIGHT = 800;
     private Tank myTank = new Tank(600, 400, Dir.UP, Group.GOOD, this);
     private List<Bullet> bullets = new ArrayList<Bullet>();
     private List<Tank> badTanks = new ArrayList<>();

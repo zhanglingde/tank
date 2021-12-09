@@ -13,6 +13,7 @@
  * 14. 加入爆炸        {@link com.ling.tank.Explode}
  * 15. 加入声音（音频文件在资源区无效）
  * 16. 添加图片工具类，通过一张图片转换方向得到多个方向的图片，更换不同阵营坦克图片    {@link com.ling.util.ImageUtil}
+ * 17. 坦克增加边界检测，敌方坦克随机移动            {@link com.ling.tank.Tank#boundsCheck()}
  */
 
 

@@ -91,8 +91,11 @@ public class Bullet {
         Rectangle rect2 = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
         if (rect1.intersects(rect2)) {
             this.die();
-            tf.getExplodes().add(new Explode(tank.getX(),tank.getY(),tf));
             tank.die();
+            // 计算爆炸的位置
+            int eX = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
+            int eY = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
+            tf.getExplodes().add(new Explode(eX,eY,tf));
         }
     }
 
