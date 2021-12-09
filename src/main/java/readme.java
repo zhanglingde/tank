@@ -12,6 +12,7 @@
  * 13. 加入 Group 区分阵营，敌方坦克随机发射子弹 (test02 分支)          {@link com.ling.tank.TankFrame#paint(java.awt.Graphics)}
  * 14. 加入爆炸        {@link com.ling.tank.Explode}
  * 15. 加入声音（音频文件在资源区无效）
+ * 16. 添加图片工具类，通过一张图片转换方向得到多个方向的图片，更换不同阵营坦克图片    {@link com.ling.util.ImageUtil}
  */
 
 

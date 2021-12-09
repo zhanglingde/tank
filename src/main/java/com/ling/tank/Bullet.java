@@ -39,16 +39,16 @@ public class Bullet {
         }
         switch (dir) {
             case LEFT:
-                g.drawImage(ResourceMgr.buffetL, x, y, null);
+                g.drawImage(ResourceMgr.bulletL2, x, y, null);
                 break;
             case UP:
-                g.drawImage(ResourceMgr.buffetU, x, y, null);
+                g.drawImage(ResourceMgr.bulletU2, x, y, null);
                 break;
             case RIGHT:
-                g.drawImage(ResourceMgr.buffetR, x, y, null);
+                g.drawImage(ResourceMgr.bulletR2, x, y, null);
                 break;
             case DOWN:
-                g.drawImage(ResourceMgr.buffetD, x, y, null);
+                g.drawImage(ResourceMgr.bulletD2, x, y, null);
                 break;
             default:
                 break;
