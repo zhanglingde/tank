@@ -37,7 +37,7 @@ public class Tank extends GameObject {
      * 实现了Model:Tank,Bullet,Explode等和View：TankFrame的分离，
      */
     private GameModel gm;
-    private boolean moving = false;
+    private boolean moving = true;
     private boolean live = true;
     private Group group;
     Random random = new Random();
@@ -73,7 +73,8 @@ public class Tank extends GameObject {
             if (group == Group.BAD) {
                 GameModel.INSTANT.remove(this);
             } else {
-//                gm.setMyTank(null);
+                GameModel.INSTANT.remove(this);
+                GameModel.INSTANT.setMyTank(null);
             }
 
             return;
@@ -124,13 +125,17 @@ public class Tank extends GameObject {
         if (group == Group.BAD && random.nextInt(100) > 95) {
             this.fire();
         }
-        //
-        // if (group == Group.BAD && random.nextInt(100) > 95) {
-        //     randomDir();
-        // }
+
+        if (group == Group.BAD && random.nextInt(100) > 95) {
+            randomDir();
+        }
 
         // 遍界检测
         boundsCheck();
+    }
+
+    public void stop() {
+        moving = false;
     }
 
     private void boundsCheck() {
@@ -149,7 +154,7 @@ public class Tank extends GameObject {
         }
     }
 
-    private void randomDir() {
+    public void randomDir() {
         // 从方向枚举数组的4个方向中，随机取一个方向的下标
         this.dir = Dir.values()[random.nextInt(4)];
     }

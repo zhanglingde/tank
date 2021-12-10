@@ -102,9 +102,9 @@ public class Bullet extends GameObject {
      *
      * @param tank
      */
-    public void collideWith(Tank tank) {
+    public boolean collideWith(Tank tank) {
         if (this.group == tank.getGroup()) {
-            return;
+            return false;
         }
         // todo 用一个 rect 来记录子弹的位置（单例模式）
         // Rectangle rect1 = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
@@ -116,7 +116,9 @@ public class Bullet extends GameObject {
             int eX = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
             int eY = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
             gm.add(new Explode(eX, eY, gm));
+            return true;
         }
+        return false;
     }
 
     private void die() {

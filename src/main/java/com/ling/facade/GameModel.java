@@ -1,5 +1,6 @@
 package com.ling.facade;
 
+import com.ling.cor.CollectorChain;
 import com.ling.mediator.GameObject;
 import com.ling.strategy.FireStrategy;
 import com.ling.strategy.FourDirFireStrategy;
@@ -23,6 +24,7 @@ public class GameModel {
     public static final GameModel INSTANT = new GameModel();
     private List<GameObject> objects = new ArrayList<>();
     private Tank myTank;
+    CollectorChain chain = new CollectorChain();
 
 
     static {
@@ -32,7 +34,7 @@ public class GameModel {
 
     private void init() {
         myTank = new Tank(600, 400, Dir.UP, Group.GOOD, this);
-
+        objects.add(myTank);
         // 初始化敌方坦克
         Integer initTankCount = Integer.valueOf((String) PropertyMgr.get("initTankCount"));
         for (Integer i = 0; i < initTankCount; i++) {
@@ -64,6 +66,13 @@ public class GameModel {
         }
         for (int i = 0; i < objects.size(); i++) {
             objects.get(i).paint(g);
+        }
+        for (int i = 0; i < objects.size(); i++) {
+            for (int j = i + 1; j < objects.size(); j++) {
+                GameObject o1 = objects.get(i);
+                GameObject o2 = objects.get(j);
+                chain.collide(o1, o2);
+            }
         }
         // 循环遍历子弹和敌方坦克，如果碰撞，两个都移除
 //        for (int i = 0; i < bullets.size(); i++) {
