@@ -1,5 +1,6 @@
 package com.ling.facade;
 
+import com.ling.mediator.GameObject;
 import com.ling.tank.Dir;
 import com.ling.tank.Group;
 import com.ling.tank.TankFrame;
@@ -17,7 +18,7 @@ import java.util.Random;
  */
 @Getter
 @Setter
-public class Tank {
+public class Tank extends GameObject {
 
     // 初始位置
     private int x = 200;
@@ -62,6 +63,7 @@ public class Tank {
      *
      * @param g
      */
+    @Override
     public void paint(Graphics g) {
         // g.setColor(Color.YELLOW);
         // g.fillRect(x, y, WIDTH, HEIGHT);
@@ -69,9 +71,9 @@ public class Tank {
 
         if (!live) {
             if (group == Group.BAD) {
-                gm.getBadTanks().remove(this);
+                GameModel.INSTANT.remove(this);
             } else {
-                gm.setMyTank(null);
+//                gm.setMyTank(null);
             }
 
             return;
@@ -158,7 +160,7 @@ public class Tank {
     public void fire() {
         int bX = x + Tank.WIDTH / 2 - Bullet.HEIGHT / 2;
         int bY = y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
-        gm.getBullets().add(new Bullet(bX, bY, dir, this.group, gm));
+        gm.add(new Bullet(bX, bY, dir, this.group, gm));
     }
 
     public void die() {

@@ -16,7 +16,10 @@
  * 17. 坦克增加边界检测，敌方坦克随机移动            {@link com.ling.facade.Tank#boundsCheck()}
  * 18. 修复碰撞检测时产生多个 rect问题，在子弹和坦克中都维护一个 rect，随着子弹和坦克的移动更新 rect
  * 19. 添加配置文件，移除敌方坦克初始化，为网络版作准备
- * 20. 门面模式：抽象出 GameModel，将 Model 与 View 分离；同时 GameModel 作为 Facade 统一与 Frame 打交道，同时负责与内部各个对象的交互
+ * 20. 策略模式
+ * 21. 门面模式：抽象出 GameModel，将 Model 与 View 分离；同时 GameModel 作为 Facade 统一与 Frame 打交道，同时负责与内部各个对象的交互
+ * 22. 调停者模式（中介者模式）：将所有物体抽象出一个父类 GameObject，游戏里所有物体与这个 GameObject 关联, GameModel 作为门面与外部进行交互，GameObject 作为中介者与内部各个对象关联
+ *     单例模式：将 GameModel 设置为单例
  */
 
 /**

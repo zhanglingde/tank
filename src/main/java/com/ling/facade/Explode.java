@@ -1,6 +1,7 @@
 package com.ling.facade;
 
 import com.ling.facade.GameModel;
+import com.ling.mediator.GameObject;
 import com.ling.tank.Audio;
 import com.ling.tank.TankFrame;
 import com.ling.util.ResourceMgr;
@@ -10,7 +11,7 @@ import java.awt.*;
 /**
  * 爆炸类
  */
-public class Explode {
+public class Explode extends GameObject {
 
     public static final int WIDTH = ResourceMgr.explodes[0].getWidth();
     public static final int HEIGHT = ResourceMgr.explodes[0].getHeight();
@@ -35,12 +36,13 @@ public class Explode {
         }).start();
     }
 
+    @Override
     public void paint(Graphics g){
 
         g.drawImage(ResourceMgr.explodes[step++],x,y,null);
 
         if(step >= ResourceMgr.explodes.length){
-            gm.getExplodes().remove(this);
+            gm.remove(this);
             // step = 0;
         }
     }

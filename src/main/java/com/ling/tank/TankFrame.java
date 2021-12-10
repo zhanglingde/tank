@@ -9,6 +9,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.logging.Logger;
 
 /**
  * 游戏界面类
@@ -20,9 +21,8 @@ import java.awt.event.WindowEvent;
 @Getter
 @Setter
 public class TankFrame extends Frame {
-
     public static final int GAME_WIDTH = 1000, GAME_HEIGHT = 800;
-    GameModel gm = new GameModel();
+//    GameModel gm = new GameModel();
 
 
     public TankFrame() {
@@ -49,7 +49,7 @@ public class TankFrame extends Frame {
      */
     @Override
     public void paint(Graphics g) {
-        gm.paint(g);
+        GameModel.INSTANT.paint(g);
     }
 
     Image offScreenImage = null;
@@ -99,7 +99,7 @@ public class TankFrame extends Frame {
                     bD = true;
                     break;
                 case KeyEvent.VK_CONTROL:
-                    gm.getMyTank().fire();
+                    GameModel.INSTANT.getMyTank().fire();
                     break;
                 default:
                     break;
@@ -135,7 +135,7 @@ public class TankFrame extends Frame {
          * 设置坦克方向
          */
         private void setTankDir() {
-            Tank myTank = gm.getMyTank();
+            Tank myTank = GameModel.INSTANT.getMyTank();
             // 只要有一个方向就移动
             if (!(bL || bU || bD || bR)) {
                 myTank.setMoving(false);

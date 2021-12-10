@@ -1,5 +1,6 @@
 package com.ling.facade;
 
+import com.ling.mediator.GameObject;
 import com.ling.strategy.FireStrategy;
 import com.ling.strategy.FourDirFireStrategy;
 import com.ling.tank.*;
@@ -19,20 +20,32 @@ import java.util.List;
 @Setter
 public class GameModel {
 
-    private Tank myTank = new Tank(600, 400, Dir.UP, Group.GOOD, this);
-    private List<Bullet> bullets = new ArrayList<Bullet>();
-    private List<Tank> badTanks = new ArrayList<>();
-    // private Explode explode = new Explode(100, 100, this);
-    private List<Explode> explodes = new ArrayList<>();
+    public static final GameModel INSTANT = new GameModel();
+    private List<GameObject> objects = new ArrayList<>();
+    private Tank myTank;
 
-    FireStrategy fireStrategy = new FourDirFireStrategy();
 
-    public GameModel() {
+    static {
+        INSTANT.init();
+    }
+
+
+    private void init() {
+        myTank = new Tank(600, 400, Dir.UP, Group.GOOD, this);
+
         // 初始化敌方坦克
         Integer initTankCount = Integer.valueOf((String) PropertyMgr.get("initTankCount"));
         for (Integer i = 0; i < initTankCount; i++) {
-            badTanks.add(new Tank(50 + i * 80, 200, Dir.DOWN, Group.BAD, this));
+            objects.add(new Tank(50 + i * 80, 200, Dir.DOWN, Group.BAD, this));
         }
+    }
+
+    public void add(GameObject gameObject) {
+        this.objects.add(gameObject);
+    }
+
+    public void remove(GameObject gameObject) {
+        this.objects.remove(gameObject);
     }
 
     /**
@@ -43,31 +56,25 @@ public class GameModel {
     public void paint(Graphics g) {
 
         g.setColor(Color.WHITE);
-        g.drawString("子弹:" + bullets.size(), 30, 100);
-        g.drawString("敌方坦克:" + badTanks.size(), 30, 130);
-        g.drawString("爆炸:" + explodes.size(), 30, 150);
+        g.drawString("子弹:" + objects.size(), 30, 100);
+//        g.drawString("敌方坦克:" + badTanks.size(), 30, 130);
+//        g.drawString("爆炸:" + explodes.size(), 30, 150);
         if (myTank != null) {
             myTank.paint(g);
         }
-        for (int i = 0; i < bullets.size(); i++) {   // 使用增强 for 循环会报错
-            bullets.get(i).paint(g);
-        }
-        for (int i = 0; i < badTanks.size(); i++) {
-            badTanks.get(i).paint(g);
+        for (int i = 0; i < objects.size(); i++) {
+            objects.get(i).paint(g);
         }
         // 循环遍历子弹和敌方坦克，如果碰撞，两个都移除
-        for (int i = 0; i < bullets.size(); i++) {
-            // 敌方子弹和我方坦克碰撞
-            if (bullets.get(i).getGroup() == Group.BAD) {
-                bullets.get(i).collideWith(myTank);
-            } else {
-                for (int j = 0; j < badTanks.size(); j++) {
-                    bullets.get(i).collideWith(badTanks.get(j));
-                }
-            }
-        }
-        for (int i = 0; i < explodes.size(); i++) {
-            explodes.get(i).paint(g);
-        }
+//        for (int i = 0; i < bullets.size(); i++) {
+//            // 敌方子弹和我方坦克碰撞
+//            if (bullets.get(i).getGroup() == Group.BAD) {
+//                bullets.get(i).collideWith(myTank);
+//            } else {
+//                for (int j = 0; j < badTanks.size(); j++) {
+//                    bullets.get(i).collideWith(badTanks.get(j));
+//                }
+//            }
+//        }
     }
 }

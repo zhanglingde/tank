@@ -1,5 +1,6 @@
 package com.ling.facade;
 
+import com.ling.mediator.GameObject;
 import com.ling.tank.*;
 import com.ling.util.ResourceMgr;
 import lombok.Data;
@@ -11,7 +12,7 @@ import java.awt.*;
  * @date 2021/12/7 12:55 下午
  */
 @Data
-public class Bullet {
+public class Bullet extends GameObject {
 
     private int x, y;
     public static int WIDTH = ResourceMgr.buffetU.getWidth();
@@ -44,12 +45,13 @@ public class Bullet {
         rect.height = HEIGHT;
     }
 
+    @Override
     public void paint(Graphics g) {
         // g.setColor(Color.RED);
         // // 绘制一个圆
         // g.fillOval(x, y, WIDTH, HEIGHT);
         if (!live) {
-            gm.getBullets().remove(this);
+            gm.remove(this);
             return;
         }
         switch (dir) {
@@ -113,7 +115,7 @@ public class Bullet {
             // 计算爆炸的位置
             int eX = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
             int eY = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
-            gm.getExplodes().add(new Explode(eX, eY, gm));
+            gm.add(new Explode(eX, eY, gm));
         }
     }
 
