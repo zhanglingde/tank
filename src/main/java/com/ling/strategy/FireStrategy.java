@@ -1,6 +1,6 @@
 package com.ling.strategy;
 
-import com.ling.tank.Tank;
+import com.ling.facade.Tank;
 
 /**
  * 开火策略

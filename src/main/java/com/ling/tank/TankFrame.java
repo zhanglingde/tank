@@ -1,9 +1,7 @@
 package com.ling.tank;
 
-import com.ling.strategy.DefaultFireStrategy;
-import com.ling.strategy.FireStrategy;
-import com.ling.strategy.FourDirFireStrategy;
-import com.ling.strategy.TwoBulletFireStrategy;
+import com.ling.facade.GameModel;
+import com.ling.facade.Tank;
 import lombok.*;
 
 import java.awt.*;
@@ -11,8 +9,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 游戏界面类
@@ -24,14 +20,9 @@ import java.util.List;
 @Getter
 @Setter
 public class TankFrame extends Frame {
-    public static final int GAME_WIDTH = 1000, GAME_HEIGHT = 800;
-    private Tank myTank = new Tank(600, 400, Dir.UP, Group.GOOD, this);
-    private List<Bullet> bullets = new ArrayList<Bullet>();
-    private List<Tank> badTanks = new ArrayList<>();
-    // private Explode explode = new Explode(100, 100, this);
-    private List<Explode> explodes = new ArrayList<>();
 
-    FireStrategy fireStrategy = new FourDirFireStrategy();
+    public static final int GAME_WIDTH = 1000, GAME_HEIGHT = 800;
+    GameModel gm = new GameModel();
 
 
     public TankFrame() {
@@ -58,39 +49,10 @@ public class TankFrame extends Frame {
      */
     @Override
     public void paint(Graphics g) {
-
-        g.setColor(Color.WHITE);
-        g.drawString("数量:" + bullets.size(), 30, 100);
-        g.drawString("敌方坦克:" + badTanks.size(), 30, 130);
-        g.drawString("爆炸:" + explodes.size(), 30, 150);
-        if (myTank != null) {
-            myTank.paint(g);
-        }
-        for (int i = 0; i < bullets.size(); i++) {   // 使用增强 for 循环会报错
-            bullets.get(i).paint(g);
-        }
-        for (int i = 0; i < badTanks.size(); i++) {
-            badTanks.get(i).paint(g);
-        }
-        // 循环遍历子弹和敌方坦克，如果碰撞，两个都移除
-        for (int i = 0; i < bullets.size(); i++) {
-            // 敌方子弹和我方坦克碰撞
-            if (bullets.get(i).getGroup() == Group.BAD) {
-                bullets.get(i).collideWith(myTank);
-            } else {
-                for (int j = 0; j < badTanks.size(); j++) {
-                    bullets.get(i).collideWith(badTanks.get(j));
-                }
-            }
-        }
-        for (int i = 0; i < explodes.size(); i++) {
-            explodes.get(i).paint(g);
-        }
-        // explode.paint(g);
+        gm.paint(g);
     }
 
     Image offScreenImage = null;
-
     /**
      * 添加双缓冲，解决界面闪烁问题（添加后界面会变黑）
      *
@@ -137,7 +99,7 @@ public class TankFrame extends Frame {
                     bD = true;
                     break;
                 case KeyEvent.VK_CONTROL:
-                    fireStrategy.fire(myTank);
+                    gm.getMyTank().fire();
                     break;
                 default:
                     break;
@@ -173,6 +135,7 @@ public class TankFrame extends Frame {
          * 设置坦克方向
          */
         private void setTankDir() {
+            Tank myTank = gm.getMyTank();
             // 只要有一个方向就移动
             if (!(bL || bU || bD || bR)) {
                 myTank.setMoving(false);

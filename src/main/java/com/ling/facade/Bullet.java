@@ -1,5 +1,6 @@
-package com.ling.tank;
+package com.ling.facade;
 
+import com.ling.tank.*;
 import com.ling.util.ResourceMgr;
 import lombok.Data;
 
@@ -19,18 +20,23 @@ public class Bullet {
     private boolean live = true;
     private Group group;
     private static final int SPEED = 10;
-    private TankFrame tf;
+//    private TankFrame tf;
     /**
      * rect可以想象成一个矩形，记录边框位置，做碰撞检测
      */
     private Rectangle rect = new Rectangle();
 
-    public Bullet(int x, int y, Dir dir, Group group, TankFrame tf) {
+    /**
+     * 实现了Model:Tank,Bullet,Explode等和View：TankFrame的分离，
+     */
+    private GameModel gm;
+
+    public Bullet(int x, int y, Dir dir, Group group, GameModel gm) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.tf = tf;
+        this.gm = gm;
 
         rect.x = x;
         rect.y = y;
@@ -43,7 +49,7 @@ public class Bullet {
         // // 绘制一个圆
         // g.fillOval(x, y, WIDTH, HEIGHT);
         if (!live) {
-            tf.getBullets().remove(this);
+            gm.getBullets().remove(this);
             return;
         }
         switch (dir) {
@@ -84,7 +90,7 @@ public class Bullet {
         }
         rect.x = x;
         rect.y = y;
-        if (x < 0 || x > tf.getWidth() || y < 0 || y > tf.getHeight()) {
+        if (x < 0 || x > TankFrame.GAME_WIDTH || y < 0 || y > TankFrame.GAME_HEIGHT) {
             live = false;
         }
     }
@@ -107,7 +113,7 @@ public class Bullet {
             // 计算爆炸的位置
             int eX = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
             int eY = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
-            tf.getExplodes().add(new Explode(eX, eY, tf));
+            gm.getExplodes().add(new Explode(eX, eY, gm));
         }
     }
 

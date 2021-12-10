@@ -1,9 +1,10 @@
-package com.ling.tank;
+package com.ling.facade;
 
+import com.ling.tank.Dir;
+import com.ling.tank.Group;
+import com.ling.tank.TankFrame;
 import com.ling.util.ResourceMgr;
 import lombok.*;
-import lombok.experimental.Accessors;
-import org.w3c.dom.css.Rect;
 
 import java.awt.*;
 import java.util.Random;
@@ -31,6 +32,10 @@ public class Tank {
      * 维持一个 TankFrame 的引用，tank 需要在 TankFrame 中创建一个子弹
      */
     private TankFrame tf;
+    /**
+     * 实现了Model:Tank,Bullet,Explode等和View：TankFrame的分离，
+     */
+    private GameModel gm;
     private boolean moving = false;
     private boolean live = true;
     private Group group;
@@ -39,13 +44,12 @@ public class Tank {
     private Rectangle rect = new Rectangle();
 
 
-
-    public Tank(int x, int y, Dir dir, Group group, TankFrame tf) {
+    public Tank(int x, int y, Dir dir, Group group, GameModel gm) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.tf = tf;
+        this.gm = gm;
 
         rect.x = x;
         rect.y = y;
@@ -65,9 +69,9 @@ public class Tank {
 
         if (!live) {
             if (group == Group.BAD) {
-                tf.getBadTanks().remove(this);
+                gm.getBadTanks().remove(this);
             } else {
-                tf.setMyTank(null);
+                gm.setMyTank(null);
             }
 
             return;
@@ -154,7 +158,7 @@ public class Tank {
     public void fire() {
         int bX = x + Tank.WIDTH / 2 - Bullet.HEIGHT / 2;
         int bY = y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
-        tf.getBullets().add(new Bullet(bX, bY, dir, this.group, tf));
+        gm.getBullets().add(new Bullet(bX, bY, dir, this.group, gm));
     }
 
     public void die() {
