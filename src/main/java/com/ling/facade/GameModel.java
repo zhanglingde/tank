@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.awt.*;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,11 +69,7 @@ public class GameModel {
 
         g.setColor(Color.WHITE);
         g.drawString("子弹:" + objects.size(), 30, 100);
-//        g.drawString("敌方坦克:" + badTanks.size(), 30, 130);
-//        g.drawString("爆炸:" + explodes.size(), 30, 150);
-//         if (myTank != null) {
-//             myTank.paint(g);
-//         }
+
         for (int i = 0; i < objects.size(); i++) {
             objects.get(i).paint(g);
         }
@@ -94,5 +91,45 @@ public class GameModel {
 //                }
 //            }
 //        }
+    }
+
+    public void save() {
+        File file = new File("D:/tank.data");
+        ObjectOutputStream oos = null;
+        try {
+            oos = new ObjectOutputStream(new FileOutputStream(file));
+            oos.writeObject(myTank);
+            oos.writeObject(objects);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            if (oos != null) {
+                try {
+                    oos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void load() {
+        File file = new File("D:/tank.data");
+        ObjectInputStream ois = null;
+        try {
+            ois = new ObjectInputStream(new FileInputStream(file));
+            myTank = (Tank) ois.readObject();
+            objects = (List<GameObject>)ois.readObject();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            if (ois != null) {
+                try {
+                    ois.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }

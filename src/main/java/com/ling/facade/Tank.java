@@ -1,6 +1,9 @@
 package com.ling.facade;
 
 import com.ling.mediator.GameObject;
+import com.ling.observer.TankFireEvent;
+import com.ling.observer.TankFireHandler;
+import com.ling.observer.TankFireObserver;
 import com.ling.strategy.DefaultFireStrategy;
 import com.ling.strategy.FireStrategy;
 import com.ling.strategy.FourDirFireStrategy;
@@ -12,6 +15,8 @@ import com.ling.util.ResourceMgr;
 import lombok.*;
 
 import java.awt.*;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -50,6 +55,7 @@ public class Tank extends GameObject {
     private static final int SPEED = 5;
     private Rectangle rect = new Rectangle();
     private FireStrategy fireStrategy;
+    private List<TankFireObserver> fireObserverList = Arrays.asList(new TankFireHandler());
 
 
     public Tank(int x, int y, Dir dir, Group group) {
@@ -162,7 +168,7 @@ public class Tank extends GameObject {
         }
 
         if (group == Group.BAD && random.nextInt(100) > 95) {
-            this.fire();
+            this.handleFireKey();
         }
 
         if (group == Group.BAD && random.nextInt(100) > 95) {
@@ -212,5 +218,12 @@ public class Tank extends GameObject {
 
     public void die() {
         this.live = false;
+    }
+
+    public void handleFireKey() {
+        TankFireEvent event = new TankFireEvent(this);
+        for (TankFireObserver o : fireObserverList) {
+            o.actionOnFire(event);
+        }
     }
 }

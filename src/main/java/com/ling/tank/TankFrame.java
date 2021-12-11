@@ -99,7 +99,13 @@ public class TankFrame extends Frame {
                     bD = true;
                     break;
                 case KeyEvent.VK_CONTROL:
-                    GameModel.getInstant().getMyTank().fire();
+                    GameModel.getInstant().getMyTank().handleFireKey();
+                    break;
+                case KeyEvent.VK_S:
+                    GameModel.getInstant().save();
+                    break;
+                case KeyEvent.VK_L:
+                    GameModel.getInstant().load();
                     break;
                 default:
                     break;
@@ -126,6 +132,8 @@ public class TankFrame extends Frame {
                 case KeyEvent.VK_DOWN:
                     bD = false;
                     break;
+
+
 
             }
             setTankDir();
