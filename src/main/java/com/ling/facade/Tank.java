@@ -23,6 +23,8 @@ public class Tank extends GameObject {
     // 初始位置
     private int x = 200;
     private int y = 200;
+    int oldX;
+    int oldY;
     public static int WIDTH = ResourceMgr.goodTankU.getWidth();
     public static int HEIGHT = ResourceMgr.goodTankU.getHeight();
     /**
@@ -71,10 +73,10 @@ public class Tank extends GameObject {
 
         if (!live) {
             if (group == Group.BAD) {
-                GameModel.INSTANT.remove(this);
+                GameModel.getInstant().remove(this);
             } else {
-                GameModel.INSTANT.remove(this);
-                GameModel.INSTANT.setMyTank(null);
+                GameModel.getInstant().remove(this);
+                // GameModel.getInstant().setMyTank(null);
             }
 
             return;
@@ -98,10 +100,19 @@ public class Tank extends GameObject {
         move();
     }
 
+
+    public void back() {
+        x = oldX;
+        y = oldY;
+    }
+
     /**
      * 坦克移动
      */
     private void move() {
+        // 记录移动之前的位置
+        oldX = x;
+        oldY = y;
         if (moving) {
             switch (dir) {
                 case LEFT:
@@ -133,6 +144,8 @@ public class Tank extends GameObject {
         // 遍界检测
         boundsCheck();
     }
+
+
 
     public void stop() {
         moving = false;

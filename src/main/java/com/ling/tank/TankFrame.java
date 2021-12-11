@@ -49,7 +49,7 @@ public class TankFrame extends Frame {
      */
     @Override
     public void paint(Graphics g) {
-        GameModel.INSTANT.paint(g);
+        GameModel.getInstant().paint(g);
     }
 
     Image offScreenImage = null;
@@ -99,7 +99,7 @@ public class TankFrame extends Frame {
                     bD = true;
                     break;
                 case KeyEvent.VK_CONTROL:
-                    GameModel.INSTANT.getMyTank().fire();
+                    GameModel.getInstant().getMyTank().fire();
                     break;
                 default:
                     break;
@@ -135,7 +135,7 @@ public class TankFrame extends Frame {
          * 设置坦克方向
          */
         private void setTankDir() {
-            Tank myTank = GameModel.INSTANT.getMyTank();
+            Tank myTank = GameModel.getInstant().getMyTank();
             // 只要有一个方向就移动
             if (!(bL || bU || bD || bR)) {
                 myTank.setMoving(false);

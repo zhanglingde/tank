@@ -21,7 +21,7 @@ import java.util.List;
 @Setter
 public class GameModel {
 
-    public static final GameModel INSTANT = new GameModel();
+    private static final GameModel INSTANT = new GameModel();
     private List<GameObject> objects = new ArrayList<>();
     private Tank myTank;
     CollectorChain chain = new CollectorChain();
@@ -40,6 +40,15 @@ public class GameModel {
         for (Integer i = 0; i < initTankCount; i++) {
             objects.add(new Tank(50 + i * 80, 200, Dir.DOWN, Group.BAD, this));
         }
+
+        add(new Wall(150,150,200,50));
+        add(new Wall(550,150,200,50));
+        add(new Wall(300,300,50,200));
+        add(new Wall(550,300,50,200));
+    }
+
+    public static GameModel getInstant() {
+        return INSTANT;
     }
 
     public void add(GameObject gameObject) {

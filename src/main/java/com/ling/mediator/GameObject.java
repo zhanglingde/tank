@@ -8,7 +8,7 @@ import java.awt.*;
  */
 public abstract class GameObject {
 
-    protected int x, y;
+    public int x, y;
 
     /**
      * 绘制图形

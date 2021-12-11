@@ -1,5 +1,6 @@
 package com.ling.cor;
 
+import com.ling.facade.Tank;
 import com.ling.mediator.GameObject;
 
 import java.util.ArrayList;
@@ -17,6 +18,8 @@ public class CollectorChain implements Collider {
     public CollectorChain() {
         add(new BulletTankCollider());
         add(new TankTankCollider());
+        add(new BulletWallCollider());
+        add(new TankWallCollider());
     }
 
     public void add(Collider collider) {
