@@ -1,9 +1,13 @@
 package com.ling.facade;
 
 import com.ling.mediator.GameObject;
+import com.ling.strategy.DefaultFireStrategy;
+import com.ling.strategy.FireStrategy;
+import com.ling.strategy.FourDirFireStrategy;
 import com.ling.tank.Dir;
 import com.ling.tank.Group;
 import com.ling.tank.TankFrame;
+import com.ling.util.PropertyMgr;
 import com.ling.util.ResourceMgr;
 import lombok.*;
 
@@ -21,8 +25,8 @@ import java.util.Random;
 public class Tank extends GameObject {
 
     // 初始位置
-    private int x = 200;
-    private int y = 200;
+    // private int x = 200;
+    // private int y = 200;
     int oldX;
     int oldY;
     public static int WIDTH = ResourceMgr.goodTankU.getWidth();
@@ -38,26 +42,40 @@ public class Tank extends GameObject {
     /**
      * 实现了Model:Tank,Bullet,Explode等和View：TankFrame的分离，
      */
-    private GameModel gm;
+    // private GameModel gm;
     private boolean moving = true;
     private boolean live = true;
     private Group group;
     Random random = new Random();
     private static final int SPEED = 5;
     private Rectangle rect = new Rectangle();
+    private FireStrategy fireStrategy;
 
 
-    public Tank(int x, int y, Dir dir, Group group, GameModel gm) {
+    public Tank(int x, int y, Dir dir, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.gm = gm;
+        GameModel.getInstant().add(this);
 
         rect.x = x;
         rect.y = y;
         rect.width = WIDTH;
         rect.height = HEIGHT;
+
+        // 初始化策略
+        if (group == Group.BAD) {
+            fireStrategy = new DefaultFireStrategy();
+        }else{
+            // 读取配置文件获取开火策略
+            String goodFSName = (String) PropertyMgr.get("goodFS");
+            try {
+                fireStrategy = (FireStrategy) Class.forName(goodFSName).newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /**
@@ -98,6 +116,16 @@ public class Tank extends GameObject {
                 break;
         }
         move();
+    }
+
+    @Override
+    public int getWidth() {
+        return WIDTH;
+    }
+
+    @Override
+    public int getHeight() {
+        return HEIGHT;
     }
 
 
@@ -176,9 +204,10 @@ public class Tank extends GameObject {
      * 坦克开火
      */
     public void fire() {
-        int bX = x + Tank.WIDTH / 2 - Bullet.HEIGHT / 2;
-        int bY = y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
-        gm.add(new Bullet(bX, bY, dir, this.group, gm));
+        // int bX = x + Tank.WIDTH / 2 - Bullet.HEIGHT / 2;
+        // int bY = y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
+        // gm.add(new Bullet(bX, bY, dir, this.group, gm));
+        fireStrategy.fire(this);
     }
 
     public void die() {

@@ -33,18 +33,18 @@ public class GameModel {
 
 
     private void init() {
-        myTank = new Tank(600, 400, Dir.UP, Group.GOOD, this);
-        objects.add(myTank);
+        myTank = new Tank(600, 400, Dir.UP, Group.GOOD);
+        // objects.add(myTank);
         // 初始化敌方坦克
         Integer initTankCount = Integer.valueOf((String) PropertyMgr.get("initTankCount"));
         for (Integer i = 0; i < initTankCount; i++) {
-            objects.add(new Tank(50 + i * 80, 200, Dir.DOWN, Group.BAD, this));
+            new Tank(50 + i * 80, 200, Dir.DOWN, Group.BAD);
         }
 
-        add(new Wall(150,150,200,50));
-        add(new Wall(550,150,200,50));
-        add(new Wall(300,300,50,200));
-        add(new Wall(550,300,50,200));
+        add(new Wall(150, 150, 200, 50));
+        add(new Wall(550, 150, 200, 50));
+        add(new Wall(300, 300, 50, 200));
+        add(new Wall(550, 300, 50, 200));
     }
 
     public static GameModel getInstant() {
@@ -70,9 +70,9 @@ public class GameModel {
         g.drawString("子弹:" + objects.size(), 30, 100);
 //        g.drawString("敌方坦克:" + badTanks.size(), 30, 130);
 //        g.drawString("爆炸:" + explodes.size(), 30, 150);
-        if (myTank != null) {
-            myTank.paint(g);
-        }
+//         if (myTank != null) {
+//             myTank.paint(g);
+//         }
         for (int i = 0; i < objects.size(); i++) {
             objects.get(i).paint(g);
         }

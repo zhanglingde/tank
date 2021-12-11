@@ -14,7 +14,7 @@ import java.awt.*;
 @Data
 public class Bullet extends GameObject {
 
-    private int x, y;
+    // private int x, y;
     public static int WIDTH = ResourceMgr.buffetU.getWidth();
     public static int HEIGHT = ResourceMgr.buffetU.getHeight();
     private Dir dir;
@@ -30,15 +30,15 @@ public class Bullet extends GameObject {
     /**
      * 实现了Model:Tank,Bullet,Explode等和View：TankFrame的分离，
      */
-    private GameModel gm;
+    // private GameModel gm;
 
-    public Bullet(int x, int y, Dir dir, Group group, GameModel gm) {
+    public Bullet(int x, int y, Dir dir, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.gm = gm;
-
+        // this.gm = gm;
+        GameModel.getInstant().add(this);
         rect.x = x;
         rect.y = y;
         rect.width = WIDTH;
@@ -51,7 +51,7 @@ public class Bullet extends GameObject {
         // // 绘制一个圆
         // g.fillOval(x, y, WIDTH, HEIGHT);
         if (!live) {
-            gm.remove(this);
+            GameModel.getInstant().remove(this);
             return;
         }
         switch (dir) {
@@ -73,6 +73,16 @@ public class Bullet extends GameObject {
 
         move();
 
+    }
+
+    @Override
+    public int getWidth() {
+        return WIDTH;
+    }
+
+    @Override
+    public int getHeight() {
+        return HEIGHT;
     }
 
     private void move() {
@@ -115,7 +125,7 @@ public class Bullet extends GameObject {
             // 计算爆炸的位置
             int eX = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
             int eY = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
-            gm.add(new Explode(eX, eY, gm));
+            new Explode(eX, eY );
             return true;
         }
         return false;
