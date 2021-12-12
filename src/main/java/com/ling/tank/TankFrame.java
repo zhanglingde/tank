@@ -7,9 +7,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Random;
 
 /**
  * 游戏界面类
@@ -29,6 +28,8 @@ public class TankFrame extends Frame {
     // private Explode explode = new Explode(100, 100, this);
     private List<Explode> explodes = new ArrayList<>();
     public static final TankFrame INSTANCE = new TankFrame();
+
+    private Map<UUID, Tank> tanks = new HashMap<>();
 
     public TankFrame() {
         setTitle("tank war");
@@ -68,6 +69,7 @@ public class TankFrame extends Frame {
         for (int i = 0; i < badTanks.size(); i++) {
             badTanks.get(i).paint(g);
         }
+        tanks.values().stream().forEach(tank -> tank.paint(g));
         // 循环遍历子弹和敌方坦克，如果碰撞，两个都移除
         for (int i = 0; i < bullets.size(); i++) {
             // 敌方子弹和我方坦克碰撞
@@ -83,6 +85,14 @@ public class TankFrame extends Frame {
             explodes.get(i).paint(g);
         }
         // explode.paint(g);
+    }
+
+    public void addTank(Tank tank) {
+        tanks.put(tank.getId(), tank);
+    }
+
+    public Tank findByUUId(UUID uuid) {
+        return tanks.get(uuid);
     }
 
     Image offScreenImage = null;

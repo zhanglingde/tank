@@ -28,8 +28,9 @@ public class ClientHandler extends SimpleChannelInboundHandler<TankJoinMsg> {
      */
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, TankJoinMsg msg) throws Exception {
-        System.out.println("接收服务器消息。。。");
+        // System.out.println("接收服务器消息。。。");
         System.out.println("msg = " + msg);
+        msg.handle();
     }
 
     /**

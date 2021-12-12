@@ -1,5 +1,6 @@
 package com.ling.tank;
 
+import com.ling.net.message.TankJoinMsg;
 import com.ling.util.ResourceMgr;
 import lombok.*;
 import lombok.experimental.Accessors;
@@ -52,6 +53,16 @@ public class Tank {
         rect.y = y;
         rect.width = WIDTH;
         rect.height = HEIGHT;
+    }
+
+    public Tank(TankJoinMsg msg) {
+        this.x = msg.getX();
+        this.y = msg.getY();
+        this.dir = msg.getDir();
+        this.group = msg.getGroup();
+        this.id = msg.getId();
+        this.moving = msg.isMoving();
+
     }
 
     /**

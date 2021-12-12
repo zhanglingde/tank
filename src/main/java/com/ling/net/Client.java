@@ -4,6 +4,7 @@ import com.ling.net.handler.ClientHandler;
 import com.ling.net.handler.TankJoinMsgDecoder;
 import com.ling.net.handler.TankJoinMsgEncoder;
 import com.ling.net.handler.TankMsgEncoder;
+import com.ling.net.message.Msg;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -20,6 +21,8 @@ import java.net.InetSocketAddress;
  * netty客户端连接远程server
  */
 public class Client {
+
+    public static final Client INSTANCE = new Client();
 
     private Channel channel = null;
 
@@ -74,16 +77,15 @@ public class Client {
      *
      * @param msg
      */
-    public void send(String msg) {
-        ByteBuf buf = Unpooled.copiedBuffer(msg.getBytes());
-        channel.writeAndFlush(buf);
+    public void send(Msg msg) {
+        channel.writeAndFlush(msg);
     }
 
     /**
      * 发送特定字段表示退出与服务器的连接
      */
     public void closeConnect() {
-        this.send("_bye_");
+        // this.send("_bye_");
     }
 
 

@@ -18,6 +18,9 @@
  * 19. 添加配置文件，移除敌方坦克初始化，为网络版作准备
  * 20. 添加 TankJionMsg 消息，并添加该消息的 编码、解码 Handler {@link com.ling.net.handler.TankJoinMsgDecoder}
  * 21. 客户端启动后，将坦克信息发送给服务器，服务器转发给所有客户端（未显示） {@link com.ling.net.Server#serverStart()}
+ * 22. 重构消息，消息中增加 handler 方法，客户端接收服务器消息后，使用 handler 方法使 Tank 显示或移动 {@link com.ling.net.Server#serverStart() }
+ * 23. 加入消息类型 MsgType，消息长度，根据消息类型处理不同的消息，在消息内进行消息的解析而不在 Decoder
+ *      中进行解析（这样多种消息都用同一个 Decoder） {@link com.ling.net.message.TankJoinMsg#parse(byte[]) }
  */
 
 

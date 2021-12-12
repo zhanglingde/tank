@@ -27,8 +27,8 @@ public class Main {
                 tankFrame.repaint();
             }
         }).start();
-        Client client = new Client();
-        client.connect();
+
+        Client.INSTANCE.connect();
 
     }
 }

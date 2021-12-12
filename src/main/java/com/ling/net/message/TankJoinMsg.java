@@ -1,16 +1,15 @@
 package com.ling.net.message;
 
+import com.ling.net.Client;
 import com.ling.tank.Dir;
 import com.ling.tank.Group;
 import com.ling.tank.Tank;
+import com.ling.tank.TankFrame;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutput;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.UUID;
 
 /**
@@ -19,7 +18,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString
-public class TankJoinMsg {
+public class TankJoinMsg extends Msg{
     private int x;
     private int y;
     private Dir dir;
@@ -49,10 +48,29 @@ public class TankJoinMsg {
     }
 
     /**
+     * 处理服务器发送的消息，在界面上新绘制一个 Tank
+     */
+    @Override
+    public void handle() {
+
+        // 接收到的消息是自己发出去的，或是已经处理过的消息，就不进行处理
+        if (id.equals(TankFrame.INSTANCE.getMyTank().getId())
+                || TankFrame.INSTANCE.findByUUId(id) != null) {
+            return;
+        }
+        System.out.println(this);
+        Tank tank = new Tank(this);
+        TankFrame.INSTANCE.addTank(tank);
+
+        Client.INSTANCE.send(new TankJoinMsg(TankFrame.INSTANCE.getMyTank()));
+    }
+
+    /**
      * 将对象转换成字节数组，通过网络传输
      *
      * @return
      */
+    @Override
     public byte[] toBytes() {
         ByteArrayOutputStream baos = null;
         DataOutputStream dos = null;
@@ -90,5 +108,33 @@ public class TankJoinMsg {
             }
         }
         return bytes;
+    }
+
+    @Override
+    public void parse(byte[] bytes) {
+        DataInputStream dis = new DataInputStream(new ByteArrayInputStream(bytes));
+        try {
+            // 先读取消息类型，根据 Type 信息处理不同的消息
+            this.x = dis.readInt();
+            this.y = dis.readInt();
+            this.dir = Dir.values()[dis.readInt()];
+            this.moving = dis.readBoolean();
+            this.group = Group.values()[dis.readInt()];
+            this.id = new UUID(dis.readLong(), dis.readLong());
+            // this.name = dis.readUTF(); 读取字符串
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                dis.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public MsgType getMsgType() {
+        return MsgType.TankJoin;
     }
 }

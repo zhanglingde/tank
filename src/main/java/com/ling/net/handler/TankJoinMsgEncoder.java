@@ -13,6 +13,12 @@ public class TankJoinMsgEncoder extends MessageToByteEncoder<TankJoinMsg> {
 
     @Override
     protected void encode(ChannelHandlerContext ctx, TankJoinMsg msg, ByteBuf byteBuf) throws Exception {
-        byteBuf.writeBytes(msg.toBytes());
+        // byteBuf.writeBytes(msg.toBytes());
+        // 分别写消息类型，消息长度，消息内容
+        byteBuf.writeInt(msg.getMsgType().ordinal());
+        byte[] bytes = msg.toBytes();
+        byteBuf.writeInt(bytes.length);
+        byteBuf.writeBytes(bytes);
+
     }
 }
