@@ -34,17 +34,20 @@ public class ServerChildHandler extends ChannelInboundHandlerAdapter {
      */
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        // 读取客户端写的数据
+        // 读取客户端写的数据，转发消息
         ByteBuf buf = null;
-        try {
-            TankJoinMsg tm = (TankJoinMsg) msg;
-            System.out.println(tm);
-
-        } finally {
-            if (msg != null) {
-                ReferenceCountUtil.release(msg);
-            }
-        }
+        // TankJoinMsg tm = (TankJoinMsg) msg;
+        // System.out.println(tm);
+        Server.clients.writeAndFlush(msg);
+        // try {
+        //     TankJoinMsg tm = (TankJoinMsg) msg;
+        //     System.out.println(tm);
+        //
+        // } finally {
+        //     if (msg != null) {
+        //         ReferenceCountUtil.release(msg);
+        //     }
+        // }
     }
 
     /**

@@ -9,6 +9,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * 游戏界面类
@@ -21,17 +22,18 @@ import java.util.List;
 @Setter
 public class TankFrame extends Frame {
     public static final int GAME_WIDTH = 1000, GAME_HEIGHT = 800;
-    private Tank myTank = new Tank(600, 400, Dir.UP, Group.GOOD, this);
+    private Random random = new Random();
+    private Tank myTank = new Tank(random.nextInt(GAME_WIDTH), 400, Dir.UP, Group.GOOD, this);
     private List<Bullet> bullets = new ArrayList<Bullet>();
     private List<Tank> badTanks = new ArrayList<>();
     // private Explode explode = new Explode(100, 100, this);
     private List<Explode> explodes = new ArrayList<>();
-
+    public static final TankFrame INSTANCE = new TankFrame();
 
     public TankFrame() {
         setTitle("tank war");
         setSize(GAME_WIDTH, GAME_HEIGHT);
-        setVisible(true);
+        // setVisible(true);
         setResizable(false);
 
         this.addKeyListener(new MyKeyListener());

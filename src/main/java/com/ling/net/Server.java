@@ -2,6 +2,7 @@ package com.ling.net;
 
 import com.ling.net.handler.ServerChildHandler;
 import com.ling.net.handler.TankJoinMsgDecoder;
+import com.ling.net.handler.TankJoinMsgEncoder;
 import com.ling.net.handler.TankMsgDecoder;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.ByteBuf;
@@ -72,7 +73,9 @@ public class Server {
                 @Override
                 protected void initChannel(SocketChannel ch) throws Exception {
                     // 一有客户端连接 ，就往服务器责任链上加一个 ServerChildHandler
-                    ch.pipeline().addLast(new TankJoinMsgDecoder());
+                    // 服务器接收消息，直接转发出去，不进行解析
+                    // ch.pipeline().addLast(new TankJoinMsgEncoder());
+                    // ch.pipeline().addLast(new TankJoinMsgDecoder());
                     ch.pipeline().addLast(new ServerChildHandler());
                 }
             });

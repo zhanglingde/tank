@@ -17,6 +17,7 @@
  * 18. 修复碰撞检测时产生多个 rect问题，在子弹和坦克中都维护一个 rect，随着子弹和坦克的移动更新 rect
  * 19. 添加配置文件，移除敌方坦克初始化，为网络版作准备
  * 20. 添加 TankJionMsg 消息，并添加该消息的 编码、解码 Handler {@link com.ling.net.handler.TankJoinMsgDecoder}
+ * 21. 客户端启动后，将坦克信息发送给服务器，服务器转发给所有客户端（未显示） {@link com.ling.net.Server#serverStart()}
  */
 
 

@@ -24,7 +24,7 @@ public class Tank {
     private int y = 200;
     public static int WIDTH = ResourceMgr.goodTankU.getWidth();
     public static int HEIGHT = ResourceMgr.goodTankU.getHeight();
-    private UUID id;
+    private UUID id = UUID.randomUUID();
     /**
      * 设置默认方向向下
      */
@@ -73,6 +73,11 @@ public class Tank {
 
             return;
         }
+
+        // 画出 uuid
+        g.setColor(Color.YELLOW);
+        g.drawString(id.toString(), this.x, this.y - 10);
+
         switch (dir) {
             case LEFT:
                 g.drawImage(group == Group.GOOD ? ResourceMgr.goodTankL : ResourceMgr.badTankL, x, y, null);
