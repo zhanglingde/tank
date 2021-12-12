@@ -21,6 +21,7 @@
  * 22. 重构消息，消息中增加 handler 方法，客户端接收服务器消息后，使用 handler 方法使 Tank 显示或移动 {@link com.ling.net.Server#serverStart() }
  * 23. 加入消息类型 MsgType，消息长度，根据消息类型处理不同的消息，在消息内进行消息的解析而不在 Decoder
  *      中进行解析（这样多种消息都用同一个 Decoder） {@link com.ling.net.message.TankJoinMsg#parse(byte[]) }
+ * 24. 添加移动和停止消息
  */
 
 

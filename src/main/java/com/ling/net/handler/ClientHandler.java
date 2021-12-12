@@ -1,5 +1,6 @@
 package com.ling.net.handler;
 
+import com.ling.net.message.Msg;
 import com.ling.net.message.TankJoinMsg;
 import com.ling.net.message.TankMsg;
 import com.ling.tank.Dir;
@@ -18,7 +19,7 @@ import java.util.UUID;
  *
  * @author zhangling  2021/12/12 11:50
  */
-public class ClientHandler extends SimpleChannelInboundHandler<TankJoinMsg> {
+public class ClientHandler extends SimpleChannelInboundHandler<Msg> {
 
     /**
      * 接收服务器消息
@@ -27,7 +28,7 @@ public class ClientHandler extends SimpleChannelInboundHandler<TankJoinMsg> {
      * @throws Exception
      */
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, TankJoinMsg msg) throws Exception {
+    protected void channelRead0(ChannelHandlerContext ctx, Msg msg) throws Exception {
         // System.out.println("接收服务器消息。。。");
         System.out.println("msg = " + msg);
         msg.handle();

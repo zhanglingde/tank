@@ -1,5 +1,8 @@
 package com.ling.tank;
 
+import com.ling.net.Client;
+import com.ling.net.message.TankStartMovingMsg;
+import com.ling.net.message.TankStopMsg;
 import lombok.*;
 
 import java.awt.*;
@@ -182,9 +185,9 @@ public class TankFrame extends Frame {
             // 只要有一个方向就移动
             if (!(bL || bU || bD || bR)) {
                 myTank.setMoving(false);
+                Client.INSTANCE.send(new TankStopMsg(getMyTank()));
             } else {
                 myTank.setMoving(true);
-
                 if (bL) {
                     myTank.setDir(Dir.LEFT);
                 }
@@ -197,6 +200,7 @@ public class TankFrame extends Frame {
                 if (bD) {
                     myTank.setDir(Dir.DOWN);
                 }
+                Client.INSTANCE.send(new TankStartMovingMsg(getMyTank()));
             }
         }
     }

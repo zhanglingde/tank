@@ -1,9 +1,6 @@
 package com.ling.net;
 
-import com.ling.net.handler.ClientHandler;
-import com.ling.net.handler.TankJoinMsgDecoder;
-import com.ling.net.handler.TankJoinMsgEncoder;
-import com.ling.net.handler.TankMsgEncoder;
+import com.ling.net.handler.*;
 import com.ling.net.message.Msg;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;
@@ -39,8 +36,8 @@ public class Client {
             bootstrap.handler(new ChannelInitializer<SocketChannel>() {
                 @Override
                 protected void initChannel(SocketChannel ch) throws Exception {
-                    ch.pipeline().addLast(new TankJoinMsgEncoder());
-                    ch.pipeline().addLast(new TankJoinMsgDecoder());
+                    ch.pipeline().addLast(new MsgEncoder());
+                    ch.pipeline().addLast(new MsgDecoder());
                     ch.pipeline().addLast(new ClientHandler());
                 }
             });
