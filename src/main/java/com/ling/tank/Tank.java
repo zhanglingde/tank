@@ -7,6 +7,7 @@ import org.w3c.dom.css.Rect;
 
 import java.awt.*;
 import java.util.Random;
+import java.util.UUID;
 
 /**
  * 坦克实体
@@ -23,6 +24,7 @@ public class Tank {
     private int y = 200;
     public static int WIDTH = ResourceMgr.goodTankU.getWidth();
     public static int HEIGHT = ResourceMgr.goodTankU.getHeight();
+    private UUID id;
     /**
      * 设置默认方向向下
      */

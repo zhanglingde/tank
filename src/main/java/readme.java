@@ -16,6 +16,7 @@
  * 17. 坦克增加边界检测，敌方坦克随机移动            {@link com.ling.tank.Tank#boundsCheck()}
  * 18. 修复碰撞检测时产生多个 rect问题，在子弹和坦克中都维护一个 rect，随着子弹和坦克的移动更新 rect
  * 19. 添加配置文件，移除敌方坦克初始化，为网络版作准备
+ * 20. 添加 TankJionMsg 消息，并添加该消息的 编码、解码 Handler {@link com.ling.net.handler.TankJoinMsgDecoder}
  */
 
 
