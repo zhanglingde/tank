@@ -4,7 +4,6 @@ import com.ling.net.message.*;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageDecoder;
-import io.netty.handler.codec.MessageToMessageDecoder;
 
 import java.util.List;
 
@@ -45,6 +44,10 @@ public class MsgDecoder extends ByteToMessageDecoder {
                 break;
             case TankStop:
                 msg = new TankStopMsg();
+                break;
+            case BulletNew:
+                msg = new BulletNewMsg();
+                break;
             default:
                 break;
         }

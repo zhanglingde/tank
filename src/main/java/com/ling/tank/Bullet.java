@@ -1,5 +1,7 @@
 package com.ling.tank;
 
+import com.ling.net.Client;
+import com.ling.net.message.BulletNewMsg;
 import com.ling.util.ResourceMgr;
 import lombok.Data;
 
@@ -36,6 +38,14 @@ public class Bullet {
         rect.y = y;
         rect.width = WIDTH;
         rect.height = HEIGHT;
+
+        Client.INSTANCE.send(new BulletNewMsg(x, y, dir));
+    }
+
+    public Bullet(BulletNewMsg bulletJoinMsg) {
+        this.x = bulletJoinMsg.getX();
+        this.y = bulletJoinMsg.getY();
+        this.dir = bulletJoinMsg.getDir();
     }
 
     public void paint(Graphics g) {
@@ -43,7 +53,7 @@ public class Bullet {
         // // 绘制一个圆
         // g.fillOval(x, y, WIDTH, HEIGHT);
         if (!live) {
-            tf.getBullets().remove(this);
+            TankFrame.INSTANCE.getBullets().remove(this);
             return;
         }
         switch (dir) {
@@ -84,7 +94,7 @@ public class Bullet {
         }
         rect.x = x;
         rect.y = y;
-        if (x < 0 || x > tf.getWidth() || y < 0 || y > tf.getHeight()) {
+        if (x < 0 || x > TankFrame.INSTANCE.getWidth() || y < 0 || y > TankFrame.INSTANCE.getHeight()) {
             live = false;
         }
     }

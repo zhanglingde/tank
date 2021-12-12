@@ -171,7 +171,7 @@ public class Tank {
     public void fire() {
         int bX = x + Tank.WIDTH / 2 - Bullet.HEIGHT / 2;
         int bY = y + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
-        tf.getBullets().add(new Bullet(bX, bY, dir, this.group, tf));
+        TankFrame.INSTANCE.getBullets().add(new Bullet(bX, bY, dir, this.group, TankFrame.INSTANCE));
     }
 
     public void die() {

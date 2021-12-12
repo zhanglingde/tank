@@ -22,6 +22,7 @@
  * 23. 加入消息类型 MsgType，消息长度，根据消息类型处理不同的消息，在消息内进行消息的解析而不在 Decoder
  *      中进行解析（这样多种消息都用同一个 Decoder） {@link com.ling.net.message.TankJoinMsg#parse(byte[]) }
  * 24. 添加移动和停止消息
+ * 25. 添加子弹创建消息
  */
 
 
