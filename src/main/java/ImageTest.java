@@ -17,7 +17,7 @@ public class ImageTest {
             // BufferedImage image = ImageIO.read(new File("D:\\AAAshuju\\IntelliJIDEA\\Spring\\tank\\src\\images\\bulletD.gif"));
             // assertNotNull(image);
             // 读取图片资源
-            BufferedImage image2 = ImageIO.read(ImageTest.class.getClassLoader().getResourceAsStream("images/bulletD.gif"));
+            BufferedImage image2 = ImageIO.read(ImageTest.class.getClassLoader().getResourceAsStream("images/wall.gif"));
             if (image2 == null) {
                 System.out.println("null");
             }

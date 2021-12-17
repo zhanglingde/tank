@@ -1,6 +1,7 @@
 package com.ling.facade;
 
 import com.ling.mediator.GameObject;
+import com.ling.util.ResourceMgr;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,22 +14,22 @@ import java.awt.*;
 @Setter
 public class Wall extends GameObject {
 
-    int width, height;
+    int width = ResourceMgr.wall.getWidth();
+    int height = ResourceMgr.wall.getHeight();
     private Rectangle rect;
 
-    public Wall(int x,int y,int w, int h) {
+    public Wall(int x, int y) {
         this.x = x;
         this.y = y;
-        this.width = w;
-        this.height = h;
-        this.rect = new Rectangle(x, y, w, h);
+        this.rect = new Rectangle(x, y,width,height );
     }
 
     @Override
     public void paint(Graphics g) {
-        g.setColor(Color.DARK_GRAY);
+//        g.setColor(Color.DARK_GRAY);
         // 画一个矩形
-        g.fillRect(x, y, width, height);
+//        g.fillRect(x, y, width, height);
+        g.drawImage(ResourceMgr.wall, x, y, null);
     }
 
     @Override

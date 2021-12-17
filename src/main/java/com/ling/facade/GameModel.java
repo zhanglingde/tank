@@ -42,10 +42,10 @@ public class GameModel {
             new Tank(50 + i * 80, 200, Dir.DOWN, Group.BAD);
         }
 
-        add(new Wall(150, 150, 200, 50));
-        add(new Wall(550, 150, 200, 50));
-        add(new Wall(300, 300, 50, 200));
-        add(new Wall(550, 300, 50, 200));
+        add(new Wall(150, 150));
+        add(new Wall(550, 150));
+        add(new Wall(300, 300));
+        add(new Wall(550, 300));
     }
 
     public static GameModel getInstant() {
