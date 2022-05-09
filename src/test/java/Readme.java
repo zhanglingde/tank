@@ -66,4 +66,40 @@ public class Readme{
      */
     void demo10(){}
 
+    /**
+     * 添加爆炸
+     */
+    void demo11(){}
+
+    /**
+     * 在正确位置添加爆炸
+     */
+    void demo12(){}
+
+    /**
+     * 添加声音
+     */
+    void demo13(){}
+
+    /**
+     * 坦克添加边界检测，地方坦克随机移动（Rectangle）
+     */
+    void demo14(){}
+
+    /**
+     * 策略模式
+     */
+    void demo15(){}
+
+    /**
+     * 单例模式
+     */
+    void demo16(){}
+
+    /**
+     * 门面模式（外观模式）：抽象出 GameModel，将 Model 与 View 分离；同时 GameModel 作为 Facade 统一与 Frame 交互，同时负责与内部各个对象的交互
+     */
+    void demo17(){}
+
+
 }
