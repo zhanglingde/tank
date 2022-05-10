@@ -1,9 +1,12 @@
-package tank.demo16;
+package tank.demo16.facade;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import tank.demo16.Dir;
+import tank.demo16.Group;
+import tank.demo16.TankFrame;
 import util.ResourceMgr;
 
 import java.awt.*;
@@ -37,7 +40,7 @@ public class Tank {
     /**
      * 维持一个 TankFrame 的引用，tank 需要在 TankFrame 中创建一个子弹
      */
-    private TankFrame tf;
+    private GameModel gm;
     private boolean living = true;
     private Group group;
     private Random random = new Random();
@@ -45,11 +48,11 @@ public class Tank {
     private Rectangle rect = new Rectangle();
 
 
-    public Tank(int x, int y, Dir dir, Group group, TankFrame tf) {
+    public Tank(int x, int y, Dir dir, Group group, GameModel gm) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.tf = tf;
+        this.gm = gm;
         this.group = group;
 
         rect.x = x;
@@ -68,9 +71,9 @@ public class Tank {
         // 坦克死亡移除
         if (!living) {
             if (group == Group.BAD) {
-                tf.getBadTanks().remove(this);
-            }else{
-                tf.setMyTank(null);
+                gm.getBadTanks().remove(this);
+            } else {
+                gm.setMyTank(null);
             }
         }
 
@@ -120,7 +123,7 @@ public class Tank {
             this.fire();
         }
         if (group == Group.BAD && random.nextInt(100) > 95) {
-                randomDir();
+            randomDir();
         }
 
         // 边界检测
@@ -133,7 +136,7 @@ public class Tank {
     public void fire() {
         int bX = x + WIDTH / 2 - Bullet.WIDTH;
         int bY = y + HEIGHT / 2 - Bullet.WIDTH;
-        tf.getBulletList().add(new Bullet(bX, bY, dir, group, tf));
+        gm.getBulletList().add(new Bullet(bX, bY, dir, group, gm));
     }
 
     public void die() {

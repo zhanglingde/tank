@@ -1,7 +1,8 @@
-package tank.demo16;
+package tank.demo16.facade;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import tank.demo16.*;
 import util.ResourceMgr;
 
 import java.awt.*;
@@ -23,16 +24,16 @@ public class Bullet {
      * 子弹是否存活
      */
     private boolean living = true;
-    private TankFrame tf;
+    private GameModel gm;
     private Group group;
 
     private Rectangle rect = new Rectangle();
 
-    public Bullet(int x, int y, Dir dir, Group group, TankFrame tf) {
+    public Bullet(int x, int y, Dir dir, Group group, GameModel gm) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.tf = tf;
+        this.gm = gm;
         this.group = group;
 
         rect.x = x;
@@ -48,7 +49,7 @@ public class Bullet {
      */
     public void paint(Graphics g) {
         if (!living) {
-            tf.getBulletList().remove(this);
+            gm.getBulletList().remove(this);
         }
 
         switch (dir) {
@@ -71,7 +72,7 @@ public class Bullet {
         move();
 
         if (!living) {
-            tf.getBulletList().remove(this);
+            gm.getBulletList().remove(this);
         }
     }
 
@@ -93,7 +94,7 @@ public class Bullet {
         rect.x = x;
         rect.y = y;
         // 子弹超出边界移除
-        if (x < 0 || x > tf.getWidth() || y < 0 || y > tf.getHeight()) {
+        if (x < 0 || x > TankFrame.GAME_WIDTH || y < 0 || y > TankFrame.GAME_HEIGHT) {
             living = false;
         }
     }
@@ -117,7 +118,8 @@ public class Bullet {
             // 计算爆炸的位置
             int eX = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
             int eY = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
-            tf.getExplodes().add(new Explode(eX,eY,tf));
+            gm.getExplodes().add(new Explode(eX,eY,gm));
+
         }
     }
 

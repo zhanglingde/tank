@@ -1,7 +1,7 @@
-package tank.demo16.strategy;
+package tank.demo17.strategy;
 
 
-import tank.demo16.facade.Tank;
+import tank.demo17.facade.Tank;
 
 import java.io.Serializable;
 

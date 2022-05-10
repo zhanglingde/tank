@@ -92,14 +92,19 @@ public class Readme{
     void demo15(){}
 
     /**
-     * 单例模式
+     * 门面模式（外观模式）：抽象出 GameModel，将 Model 与 View 分离；同时 GameModel 作为 Facade 统一与 Frame 交互，同时负责与内部各个对象的交互
      */
     void demo16(){}
 
     /**
-     * 门面模式（外观模式）：抽象出 GameModel，将 Model 与 View 分离；同时 GameModel 作为 Facade 统一与 Frame 交互，同时负责与内部各个对象的交互
+     * 调停者模式（中介者模式）：将所有物体抽象出一个父类 GameObject，游戏里所有物体与这个 GameObject 关联, GameModel 作为门面与外部进行交互，GameObject 作为中介者与内部各个对象关联
      */
     void demo17(){}
+
+    /**
+     * 责任链模式：碰撞检测
+     */
+    void demo18(){}
 
 
 }

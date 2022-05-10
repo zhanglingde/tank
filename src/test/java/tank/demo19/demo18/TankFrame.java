@@ -1,11 +1,11 @@
-package tank.demo16;
+package tank.demo19.demo18;
 
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import tank.demo16.facade.GameModel;
-import tank.demo16.facade.Tank;
+import tank.demo19.demo18.facade.GameModel;
+import tank.demo19.demo18.facade.Tank;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -29,18 +29,6 @@ public class TankFrame extends Frame {
 
     GameModel gm = new GameModel();
 
-    // Tank myTank = new Tank(200, 400, Dir.UP, Group.GOOD, this);
-    // List<Bullet> bulletList = new ArrayList<>();
-    // List<Tank> badTanks = new ArrayList<>();
-    // List<Explode> explodes = new ArrayList<>();
-    //
-    // private FireStrategy fireStrategy = new FourDirFireStrategy();
-
-    // {
-    //     for (int i = 0; i < 5; i++) {
-    //         badTanks.add(new Tank(50 + (i * 100), 200, Dir.DOWN, Group.BAD, this));
-    //     }
-    // }
 
     public TankFrame() {
         setTitle("tank war");
@@ -70,30 +58,6 @@ public class TankFrame extends Frame {
     @Override
     public void paint(Graphics g) {
         gm.paint(g);
-
-        // g.setColor(Color.WHITE);
-        // g.drawString("子弹数量" + bulletList.size(), 30, 100);
-        // g.drawString("坦克数量" + badTanks.size(), 30, 120);
-        //
-        // if (myTank != null) {
-        //     myTank.paint(g);
-        // }
-        // for (int i = 0; i < bulletList.size(); i++) {
-        //     bulletList.get(i).paint(g);
-        // }
-        // for (int i = 0; i < badTanks.size(); i++) {
-        //     badTanks.get(i).paint(g);
-        // }
-        // for (int i = 0; i < explodes.size(); i++) {
-        //     explodes.get(i).paint(g);
-        // }
-        //
-        // // 循环遍历子弹和敌方坦克，如果碰撞，两个都移除
-        // for (int i = 0; i < bulletList.size(); i++) {
-        //     for (int j = 0; j < badTanks.size(); j++) {
-        //         bulletList.get(i).collideWith(badTanks.get(j));
-        //     }
-        // }
     }
 
 

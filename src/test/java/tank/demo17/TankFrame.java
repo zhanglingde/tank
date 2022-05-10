@@ -1,11 +1,11 @@
-package tank.demo16;
+package tank.demo17;
 
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import tank.demo16.facade.GameModel;
-import tank.demo16.facade.Tank;
+import tank.demo17.facade.GameModel;
+import tank.demo17.facade.Tank;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;
