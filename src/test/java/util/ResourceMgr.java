@@ -12,7 +12,7 @@ public class ResourceMgr {
     public static BufferedImage goodTankL, goodTankU, goodTankR, goodTankD;
     public static BufferedImage badTankL, badTankU, badTankR, badTankD;
     public static BufferedImage bulletL2, bulletU2, bulletR2, bulletD2;
-    public static BufferedImage wall,water;
+    public static BufferedImage wall,water,home,steel;
     // 爆炸图片数组
     public static BufferedImage[] explodes = new BufferedImage[16];
 
@@ -44,7 +44,9 @@ public class ResourceMgr {
             bulletL2 = ImageUtil.rotateImage(bulletU2, 270);
 
             wall = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/wall.gif"));
-            water = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/wall.gif"));
+            water = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/water.gif"));
+            home = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/home.gif"));
+            steel = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/steel.gif"));
 
             for (int i = 0; i < explodes.length; i++) {
                 explodes[i] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/e" + (i + 1) + ".gif"));

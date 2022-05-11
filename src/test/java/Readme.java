@@ -106,5 +106,20 @@ public class Readme{
      */
     void demo18(){}
 
+    /**
+     * 单例模式：{@link GameMo}
+     */
+    void demo19(){}
+
+    /**
+     * 增强墙体：
+     */
+    void demo20(){}
+
+    /**
+     * 装饰者模式
+     */
+    void demo21(){}
+
 
 }
