@@ -9,6 +9,7 @@ import tank.demo20.cor.CollectorChain;
 import tank.demo20.mediator.GameObject;
 import tank.demo20.strategy.FireStrategy;
 import tank.demo20.strategy.FourDirFireStrategy;
+import util.MapUtil;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class GameModel {
 
     private static final GameModel INSTANCE = new GameModel();
 
-    private Tank myTank = new Tank(600, 400, Dir.UP, Group.GOOD);
+    private Tank myTank = new Tank(240, 756, Dir.UP, Group.GOOD);
     private List<GameObject> objects = new ArrayList<>();
     CollectorChain chain = new CollectorChain();
 
@@ -44,27 +45,29 @@ public class GameModel {
 
     FireStrategy fireStrategy = new FourDirFireStrategy();
 
-    public GameModel() {
+    static {
+        INSTANCE.init();
+    }
+
+    private void init(){
         objects.add(myTank);
         // 初始化敌方坦克
-        for (int i = 0; i < 5; i++) {
-            // gm.add(new Tank(50 + (i * 100), 200, Dir.DOWN, Group.BAD, this));
-            add(new Tank(50 + (i * 100), 200, Dir.DOWN, Group.BAD));
-        }
-        add(new Wall(410, 736));
-        add(new Home(470, 736));
-        add(new Wall(530, 736));
-        add(new Wall(410, 676));
-        add(new Wall(470, 676));
-        add(new Wall(530, 676));
+        // for (int i = 0; i < 5; i++) {
+        //     // gm.add(new Tank(50 + (i * 100), 200, Dir.DOWN, Group.BAD, this));
+        //     add(new Tank(50 + (i * 100), 200, Dir.DOWN, Group.BAD));
+        // }
 
-        pass2();
+
+        MapUtil.pass2();
+    }
+
+    public GameModel() {
 
     }
 
-    public void pass2(){
-        add(new SteelWall(530, 600));
-    }
+
+
+
 
     /**
      * 画出一个图形

@@ -5,16 +5,13 @@ import util.ResourceMgr;
 
 import java.awt.*;
 
-/**
- * 钢墙
- */
-public class SteelWall extends GameObject {
+public class QuarterWall extends GameObject {
 
-    int width = ResourceMgr.wall.getWidth();
-    int height = ResourceMgr.wall.getHeight();
+    int width = ResourceMgr.quarterWall.getWidth();
+    int height = ResourceMgr.quarterWall.getHeight();
     private Rectangle rect;
 
-    public SteelWall(int x, int y) {
+    public QuarterWall(int x, int y) {
         this.x = x;
         this.y = y;
 
@@ -25,7 +22,7 @@ public class SteelWall extends GameObject {
     public void paint(Graphics g) {
         g.setColor(Color.DARK_GRAY);
 
-        g.drawImage(ResourceMgr.steel, x, y,null);
+        g.drawImage(ResourceMgr.quarterWall, x, y,null);
         // 画一个矩形
         // g.fillRect(x, y, w, h);
     }

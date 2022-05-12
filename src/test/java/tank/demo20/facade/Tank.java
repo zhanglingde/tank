@@ -37,7 +37,7 @@ public class Tank extends GameObject {
      */
     private Dir dir = Dir.DOWN;
     private static final int SPEED = 5;
-    private boolean moving = true;
+    private boolean moving = false;
     /**
      * 维持一个 TankFrame 的引用，tank 需要在 TankFrame 中创建一个子弹
      */
@@ -83,16 +83,16 @@ public class Tank extends GameObject {
 
         switch (dir) {
             case LEFT:
-                g.drawImage(ResourceMgr.goodTankL, x, y, null);
+                g.drawImage(group == Group.GOOD ? ResourceMgr.goodTankL : ResourceMgr.badTankL, x, y, null);
                 break;
             case UP:
-                g.drawImage(ResourceMgr.goodTankU, x, y, null);
+                g.drawImage(group == Group.GOOD ? ResourceMgr.goodTankU : ResourceMgr.badTankU, x, y, null);
                 break;
             case RIGHT:
-                g.drawImage(ResourceMgr.goodTankR, x, y, null);
+                g.drawImage(group == Group.GOOD ? ResourceMgr.goodTankR : ResourceMgr.badTankR, x, y, null);
                 break;
             case DOWN:
-                g.drawImage(ResourceMgr.goodTankD, x, y, null);
+                g.drawImage(group == Group.GOOD ? ResourceMgr.goodTankD : ResourceMgr.badTankD, x, y, null);
                 break;
             default:
                 break;

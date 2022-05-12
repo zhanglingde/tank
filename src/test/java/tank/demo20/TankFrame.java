@@ -25,10 +25,8 @@ import java.awt.event.WindowEvent;
 @Setter
 @AllArgsConstructor
 public class TankFrame extends Frame {
-    public static int GAME_WIDTH = 1000, GAME_HEIGHT = 800;
-
-    // GameModel gm = new GameModel();
-
+    // 36
+    public static int GAME_WIDTH = 780, GAME_HEIGHT = 790;
 
     public TankFrame() {
         setTitle("tank war");
@@ -57,7 +55,6 @@ public class TankFrame extends Frame {
      */
     @Override
     public void paint(Graphics g) {
-        // gm.paint(g);
         GameModel.getInstance().paint(g);
     }
 
@@ -150,7 +147,6 @@ public class TankFrame extends Frame {
          * 设置坦克方向
          */
         private void setTankDir() {
-            // Tank myTank = gm.getMyTank();
             Tank myTank = GameModel.getInstance().getMyTank();
             if (bL || bU || bR || bD) {
                 myTank.setMoving(true);
