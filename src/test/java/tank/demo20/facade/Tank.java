@@ -28,7 +28,8 @@ public class Tank extends GameObject {
     // 初始位置
     private int x = 200;
     private int y = 200;
-
+    int oldX;
+    int oldY;
     public static int WIDTH = ResourceMgr.goodTankU.getWidth();
     public static int HEIGHT = ResourceMgr.goodTankU.getHeight();
 
@@ -37,7 +38,7 @@ public class Tank extends GameObject {
      */
     private Dir dir = Dir.DOWN;
     private static final int SPEED = 5;
-    private boolean moving = false;
+    private boolean moving = true;
     /**
      * 维持一个 TankFrame 的引用，tank 需要在 TankFrame 中创建一个子弹
      */
@@ -53,7 +54,6 @@ public class Tank extends GameObject {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        // this.gm = gm;
         this.group = group;
 
         rect.x = x;
@@ -72,11 +72,9 @@ public class Tank extends GameObject {
         // 坦克死亡移除
         if (!living) {
             if (group == Group.BAD) {
-                // gm.getBadTanks().remove(this);
-                // gm.remove(this);
                 GameModel.getInstance().remove(this);
             } else {
-                // gm.setMyTank(null);
+                // GameModel.getInstance().remove(this);
                 GameModel.getInstance().setMyTank(null);
             }
         }
@@ -101,10 +99,17 @@ public class Tank extends GameObject {
         move();
     }
 
+    public void back() {
+        x = oldX;
+        y = oldY;
+    }
+
     /**
      * 坦克移动
      */
     private void move() {
+        oldX = x;
+        oldY = y;
         if (moving) {
             switch (dir) {
                 case LEFT:

@@ -1,11 +1,11 @@
-package tank.demo21.facade;
+package tank.demo30.facade;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import tank.demo21.Dir;
-import tank.demo21.Group;
-import tank.demo21.TankFrame;
-import tank.demo21.mediator.GameObject;
+import tank.demo30.Dir;
+import tank.demo30.Group;
+import tank.demo30.TankFrame;
+import tank.demo30.mediator.GameObject;
 import util.ResourceMgr;
 
 import java.awt.*;
@@ -18,15 +18,16 @@ import java.awt.*;
 @NoArgsConstructor
 public class Bullet extends GameObject {
 
-    // private int x, y;
+    private int x, y;
     public static int WIDTH = ResourceMgr.bulletU.getWidth();
     public static int HEIGHT = ResourceMgr.bulletU.getHeight();
     private Dir dir;
-    private static final int SPEED = 6;
+    private static final int SPEED = 10;
     /**
      * 子弹是否存活
      */
     private boolean living = true;
+    // private GameModel gm;
     private Group group;
 
     private Rectangle rect = new Rectangle();
@@ -35,9 +36,8 @@ public class Bullet extends GameObject {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        // this.gm = gm;
         this.group = group;
-
-        GameModel.getInstance().add(this);
 
         rect.x = x;
         rect.y = y;
@@ -74,8 +74,12 @@ public class Bullet extends GameObject {
 
         move();
 
+        if (!living) {
+            // gm.getBulletList().remove(this);
+            // gm.remove(this);
+            GameModel.getInstance().remove(this);
+        }
     }
-
 
     private void move() {
         switch (dir) {
@@ -110,30 +114,23 @@ public class Bullet extends GameObject {
             return false;
         }
 
+        // Rectangle rect1 = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
+        // Rectangle rect2 = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
+        // 确定此 Rectangle 是否与指定的 Rectangle 相交
         if (rect.intersects(tank.getRect())) {
             this.die();
             tank.die();
             // 计算爆炸的位置
             int eX = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
             int eY = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
+            // gm.add(new Explode(eX,eY,gm));
             GameModel.getInstance().add(new Explode(eX,eY));
             return true;
         }
         return false;
     }
 
-    public void die() {
+    private void die() {
         this.living = false;
     }
-
-    @Override
-    public int getWidth() {
-        return WIDTH;
-    }
-
-    @Override
-    public int getHeight() {
-        return HEIGHT;
-    }
-
 }

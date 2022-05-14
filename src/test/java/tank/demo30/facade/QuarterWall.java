@@ -1,6 +1,6 @@
-package tank.demo20.facade;
+package tank.demo30.facade;
 
-import tank.demo20.mediator.GameObject;
+import tank.demo30.mediator.GameObject;
 import util.ResourceMgr;
 
 import java.awt.*;

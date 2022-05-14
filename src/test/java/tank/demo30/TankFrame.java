@@ -1,11 +1,11 @@
-package tank.demo21;
+package tank.demo30;
 
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import tank.demo21.facade.GameModel;
-import tank.demo21.facade.Tank;
+import tank.demo30.facade.GameModel;
+import tank.demo30.facade.Tank;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -25,7 +25,8 @@ import java.awt.event.WindowEvent;
 @Setter
 @AllArgsConstructor
 public class TankFrame extends Frame {
-    public static int GAME_WIDTH = 1000, GAME_HEIGHT = 800;
+    // 36
+    public static int GAME_WIDTH = 780, GAME_HEIGHT = 790;
 
     public TankFrame() {
         setTitle("tank war");
@@ -54,8 +55,6 @@ public class TankFrame extends Frame {
      */
     @Override
     public void paint(Graphics g) {
-        g.setColor(Color.WHITE);
-        g.drawString("对象个数：" + GameModel.getInstance().getObjects().size(), 50, 100);
         GameModel.getInstance().paint(g);
     }
 
@@ -108,7 +107,9 @@ public class TankFrame extends Frame {
                     bD = true;
                     break;
                 case KeyEvent.VK_CONTROL:
+                    // gm.getFireStrategy().fire(gm.getMyTank());
                     GameModel.getInstance().getFireStrategy().fire(GameModel.getInstance().getMyTank());
+                    // fireStrategy.fire(myTank);
                     break;
                 default:
                     break;

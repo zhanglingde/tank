@@ -35,7 +35,6 @@ public class Explode extends GameObject {
             // gm.getExplodes().remove(this);
             // gm.remove(this);
             GameModel.getInstance().remove(this);
-            // step = 0;
         }
     }
 }

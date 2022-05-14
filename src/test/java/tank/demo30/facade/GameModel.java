@@ -1,14 +1,14 @@
-package tank.demo20.facade;
+package tank.demo30.facade;
 
 
 import lombok.Getter;
 import lombok.Setter;
-import tank.demo20.Dir;
-import tank.demo20.Group;
-import tank.demo20.cor.CollectorChain;
-import tank.demo20.mediator.GameObject;
-import tank.demo20.strategy.FireStrategy;
-import tank.demo20.strategy.FourDirFireStrategy;
+import tank.demo30.Dir;
+import tank.demo30.Group;
+import tank.demo30.cor.CollectorChain;
+import tank.demo30.mediator.GameObject;
+import tank.demo30.strategy.FireStrategy;
+import tank.demo30.strategy.FourDirFireStrategy;
 import util.MapUtil;
 
 import java.awt.*;
@@ -52,21 +52,13 @@ public class GameModel {
     private void init(){
         objects.add(myTank);
         // 初始化敌方坦克
-        for (int i = 0; i < 5; i++) {
-            add(new Tank(50 + (i * 100), 200, Dir.DOWN, Group.BAD));
-        }
-
-        GameModel.getInstance().add(new Wall(0,500));
-        GameModel.getInstance().add(new Wall(60,500));
-        GameModel.getInstance().add(new Wall(120,500));
-        GameModel.getInstance().add(new Wall(180,500));
-        GameModel.getInstance().add(new Wall(240,500));
-        GameModel.getInstance().add(new Wall(300,500));
-        GameModel.getInstance().add(new Wall(360,500));
-        GameModel.getInstance().add(new Wall(420,500));
-        GameModel.getInstance().add(new Wall(480,500));
+        // for (int i = 0; i < 5; i++) {
+        //     // gm.add(new Tank(50 + (i * 100), 200, Dir.DOWN, Group.BAD, this));
+        //     add(new Tank(50 + (i * 100), 200, Dir.DOWN, Group.BAD));
+        // }
 
 
+        MapUtil.pass2();
     }
 
     public GameModel() {

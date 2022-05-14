@@ -48,9 +48,19 @@ public class GameModel {
         objects.add(myTank);
         // 初始化敌方坦克
         for (int i = 0; i < 5; i++) {
-            // gm.add(new Tank(50 + (i * 100), 200, Dir.DOWN, Group.BAD, this));
             add(new Tank(50 + (i * 100), 200, Dir.DOWN, Group.BAD));
         }
+
+        add(new Wall(0,500));
+        add(new Wall(60,500));
+        add(new Wall(120,500));
+        add(new Wall(180,500));
+        add(new Wall(240,500));
+        add(new Wall(300,500));
+        add(new Wall(360,500));
+        add(new Wall(420,500));
+        add(new Wall(480,500));
+
         add(new Wall(410, 736));
         add(new Home(470, 736));
         add(new Wall(530, 736));
@@ -58,12 +68,6 @@ public class GameModel {
         add(new Wall(470, 676));
         add(new Wall(530, 676));
 
-        pass2();
-
-    }
-
-    public void pass2(){
-        add(new SteelWall(530, 600));
     }
 
     /**
@@ -89,19 +93,6 @@ public class GameModel {
                 chain.collide(o1, o2);
             }
         }
-
-
-        // 循环遍历子弹和敌方坦克，如果碰撞，两个都移除
-        // for (int i = 0; i < bulletList.size(); i++) {
-        //     // 敌方子弹和我方坦克碰撞
-        //     if (bulletList.get(i).getGroup() == Group.BAD) {
-        //         bulletList.get(i).collideWith(myTank);
-        //     } else {
-        //         for (int j = 0; j < badTanks.size(); j++) {
-        //             bulletList.get(i).collideWith(badTanks.get(j));
-        //         }
-        //     }
-        // }
 
     }
 }

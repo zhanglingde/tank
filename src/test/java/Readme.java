@@ -112,7 +112,7 @@ public class Readme{
     void demo19(){}
 
     /**
-     * 增强墙体：
+     * 增强墙体：等其他物体
      */
     void demo20(){}
 

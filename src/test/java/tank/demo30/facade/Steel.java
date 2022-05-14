@@ -1,6 +1,6 @@
-package tank.demo21.facade;
+package tank.demo30.facade;
 
-import tank.demo21.mediator.GameObject;
+import tank.demo30.mediator.GameObject;
 import util.ResourceMgr;
 
 import java.awt.*;
@@ -8,13 +8,13 @@ import java.awt.*;
 /**
  * 钢墙
  */
-public class SteelWall extends GameObject {
+public class Steel extends GameObject {
 
     int width = ResourceMgr.wall.getWidth();
     int height = ResourceMgr.wall.getHeight();
     private Rectangle rect;
 
-    public SteelWall(int x, int y) {
+    public Steel(int x, int y) {
         this.x = x;
         this.y = y;
 
@@ -26,15 +26,7 @@ public class SteelWall extends GameObject {
         g.setColor(Color.DARK_GRAY);
 
         g.drawImage(ResourceMgr.steel, x, y,null);
-    }
-
-    @Override
-    public int getWidth() {
-        return width;
-    }
-
-    @Override
-    public int getHeight() {
-        return width;
+        // 画一个矩形
+        // g.fillRect(x, y, w, h);
     }
 }

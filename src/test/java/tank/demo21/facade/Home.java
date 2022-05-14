@@ -24,4 +24,14 @@ public class Home extends GameObject {
 
         g.drawImage(ResourceMgr.home, x, y,null);
     }
+
+    @Override
+    public int getWidth() {
+        return width;
+    }
+
+    @Override
+    public int getHeight() {
+        return height;
+    }
 }

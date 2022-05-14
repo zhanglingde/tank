@@ -1,7 +1,4 @@
-package tank.demo21.mediator;
-
-import lombok.Getter;
-import lombok.Setter;
+package tank.demo30.mediator;
 
 import java.awt.*;
 
@@ -9,8 +6,6 @@ import java.awt.*;
  * @author zhangling
  * @date 2022/5/10 6:44 下午
  */
-@Getter
-@Setter
 public abstract class GameObject {
 
     protected int x, y;
@@ -20,8 +15,4 @@ public abstract class GameObject {
      * @param g
      */
     public abstract void paint(Graphics g);
-
-    public abstract int getWidth();
-
-    public abstract int getHeight();
 }

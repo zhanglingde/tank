@@ -26,9 +26,11 @@ import java.util.Random;
 public class Tank extends GameObject {
 
     // 初始位置
-    private int x = 200;
-    private int y = 200;
+    // private int x = 200;
+    // private int y = 200;
 
+    int oldX;
+    int oldY;
     public static int WIDTH = ResourceMgr.goodTankU.getWidth();
     public static int HEIGHT = ResourceMgr.goodTankU.getHeight();
 
@@ -41,7 +43,6 @@ public class Tank extends GameObject {
     /**
      * 维持一个 TankFrame 的引用，tank 需要在 TankFrame 中创建一个子弹
      */
-    // private GameModel gm;
     private boolean living = true;
     private Group group;
     private Random random = new Random();
@@ -53,7 +54,6 @@ public class Tank extends GameObject {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        // this.gm = gm;
         this.group = group;
 
         rect.x = x;
@@ -72,11 +72,8 @@ public class Tank extends GameObject {
         // 坦克死亡移除
         if (!living) {
             if (group == Group.BAD) {
-                // gm.getBadTanks().remove(this);
-                // gm.remove(this);
                 GameModel.getInstance().remove(this);
             } else {
-                // gm.setMyTank(null);
                 GameModel.getInstance().setMyTank(null);
             }
         }
@@ -101,10 +98,22 @@ public class Tank extends GameObject {
         move();
     }
 
+    @Override
+    public int getWidth() {
+        return WIDTH;
+    }
+
+    @Override
+    public int getHeight() {
+        return HEIGHT;
+    }
+
     /**
      * 坦克移动
      */
     private void move() {
+        oldX = x;
+        oldY = y;
         if (moving) {
             switch (dir) {
                 case LEFT:
@@ -123,9 +132,9 @@ public class Tank extends GameObject {
             rect.x = x;
             rect.y = y;
         }
-        if (group == Group.BAD && random.nextInt(10) > 8) {
-            this.fire();
-        }
+        // if (group == Group.BAD && random.nextInt(10) > 8) {
+        //     this.fire();
+        // }
         if (group == Group.BAD && random.nextInt(100) > 95) {
             randomDir();
         }
@@ -134,12 +143,17 @@ public class Tank extends GameObject {
         boundsCheck();
     }
 
+    public void back() {
+        x = oldX;
+        y = oldY;
+    }
+
     /**
      * 坦克开火
      */
     public void fire() {
-        int bX = x + WIDTH / 2 - Bullet.WIDTH;
-        int bY = y + HEIGHT / 2 - Bullet.WIDTH;
+        int bX = x + Tank.WIDTH / 2 - Bullet.HEIGHT / 2;
+        int bY = y + Tank.WIDTH / 2 - Bullet.HEIGHT / 2;
 
         GameModel.getInstance().add(new Bullet(bX, bY, dir, group));
     }

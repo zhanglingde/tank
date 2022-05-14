@@ -1,9 +1,9 @@
-package tank.demo21.cor;
+package tank.demo30.cor;
 
 
 
 
-import tank.demo21.mediator.GameObject;
+import tank.demo30.mediator.GameObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +21,6 @@ public class CollectorChain implements Collider {
     public CollectorChain() {
         add(new BulletTankCollider());
         add(new TankTankCollider());
-        add(new BulletWallCollider());
-        add(new TankWallCollider());
     }
 
     public void add(Collider collider) {
