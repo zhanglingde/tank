@@ -6,14 +6,13 @@ public class MapUtil {
 
     public static void pass2() {
         // 0 60 120 180 240 300 360 420 480 540 600 660 720
-        // 家
         home();
         first();
         second();
         third();
         four();
         five();
-        sit();
+        six();
         seven();
         eight();
         nine();
@@ -100,7 +99,7 @@ public class MapUtil {
 
     private static void seven() {
         GameModel.getInstance().add(new Wall(60, 400));
-        GameModel.getInstance().add(new Wall(120, 400));
+        GameModel.getInstance().add(new Water(120, 400));
         GameModel.getInstance().add(new Wall(180, 400));
         GameModel.getInstance().add(new Grass(240, 400));
         GameModel.getInstance().add(new Grass(300, 400));
@@ -110,7 +109,7 @@ public class MapUtil {
         GameModel.getInstance().add(new Wall(660, 400));
     }
 
-    private static void sit() {
+    private static void six() {
         GameModel.getInstance().add(new Steel(180, 460));
         GameModel.getInstance().add(new Grass(240, 460));
         GameModel.getInstance().add(new Wall(300, 460));

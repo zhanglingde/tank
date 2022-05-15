@@ -7,6 +7,7 @@ import tank.demo30.Dir;
 import tank.demo30.Group;
 import tank.demo30.cor.CollectorChain;
 import tank.demo30.mediator.GameObject;
+import tank.demo30.strategy.DefaultFireStrategy;
 import tank.demo30.strategy.FireStrategy;
 import tank.demo30.strategy.FourDirFireStrategy;
 import util.MapUtil;
@@ -24,7 +25,7 @@ public class GameModel {
 
     private static final GameModel INSTANCE = new GameModel();
 
-    private Tank myTank = new Tank(240, 756, Dir.UP, Group.GOOD);
+    private Tank myTank = new Tank(240, 756, Dir.UP, Group.GOOD, false);
     private List<GameObject> objects = new ArrayList<>();
     CollectorChain chain = new CollectorChain();
 
@@ -37,25 +38,23 @@ public class GameModel {
         this.objects.remove(gameObject);
     }
 
-    public static GameModel getInstance(){
+    public static GameModel getInstance() {
         return INSTANCE;
     }
 
 
-
-    FireStrategy fireStrategy = new FourDirFireStrategy();
+    FireStrategy fireStrategy = new DefaultFireStrategy();
 
     static {
         INSTANCE.init();
     }
 
-    private void init(){
+    private void init() {
         objects.add(myTank);
         // 初始化敌方坦克
-        // for (int i = 0; i < 5; i++) {
-        //     // gm.add(new Tank(50 + (i * 100), 200, Dir.DOWN, Group.BAD, this));
-        //     add(new Tank(50 + (i * 100), 200, Dir.DOWN, Group.BAD));
-        // }
+        add(new Tank(0, 0, Dir.DOWN, Group.BAD, true));
+        add(new Tank(360, 0, Dir.DOWN, Group.BAD, true));
+        add(new Tank(720, 0, Dir.DOWN, Group.BAD, true));
 
 
         MapUtil.pass2();
@@ -66,9 +65,6 @@ public class GameModel {
     }
 
 
-
-
-
     /**
      * 画出一个图形
      *
@@ -77,7 +73,6 @@ public class GameModel {
     public void paint(Graphics g) {
 
         g.setColor(Color.WHITE);
-
         if (myTank != null) {
             myTank.paint(g);
         }
@@ -92,19 +87,5 @@ public class GameModel {
                 chain.collide(o1, o2);
             }
         }
-
-
-        // 循环遍历子弹和敌方坦克，如果碰撞，两个都移除
-        // for (int i = 0; i < bulletList.size(); i++) {
-        //     // 敌方子弹和我方坦克碰撞
-        //     if (bulletList.get(i).getGroup() == Group.BAD) {
-        //         bulletList.get(i).collideWith(myTank);
-        //     } else {
-        //         for (int j = 0; j < badTanks.size(); j++) {
-        //             bulletList.get(i).collideWith(badTanks.get(j));
-        //         }
-        //     }
-        // }
-
     }
 }

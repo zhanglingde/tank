@@ -15,6 +15,7 @@ public class ResourceMgr {
     public static BufferedImage wall,water,home,steel,quarterWall,grass;
     // 爆炸图片数组
     public static BufferedImage[] explodes = new BufferedImage[16];
+    public static BufferedImage[] explodes2 = new BufferedImage[10];
 
     static {
         try {
@@ -54,6 +55,9 @@ public class ResourceMgr {
 
             for (int i = 0; i < explodes.length; i++) {
                 explodes[i] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/e" + (i + 1) + ".gif"));
+            }
+            for (int i = 0; i < explodes2.length; i++) {
+                explodes2[i] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/" + i + ".gif"));
             }
         } catch (Exception e) {
             e.printStackTrace();

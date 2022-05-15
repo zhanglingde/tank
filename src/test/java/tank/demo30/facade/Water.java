@@ -9,13 +9,13 @@ import java.awt.*;
 
 @Getter
 @Setter
-public class Wall extends GameObject {
+public class Water extends GameObject {
 
-    int width = ResourceMgr.wall.getWidth();
-    int height = ResourceMgr.wall.getHeight();
+    int width = ResourceMgr.water.getWidth();
+    int height = ResourceMgr.water.getHeight();
     public Rectangle rect;
 
-    public Wall(int x, int y) {
+    public Water(int x, int y) {
         this.x = x;
         this.y = y;
 
@@ -24,6 +24,6 @@ public class Wall extends GameObject {
 
     @Override
     public void paint(Graphics g) {
-        g.drawImage(ResourceMgr.wall, x, y, null);
+        g.drawImage(ResourceMgr.water, x, y, null);
     }
 }

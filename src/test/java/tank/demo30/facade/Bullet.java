@@ -114,8 +114,6 @@ public class Bullet extends GameObject {
             return false;
         }
 
-        // Rectangle rect1 = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
-        // Rectangle rect2 = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
         // 确定此 Rectangle 是否与指定的 Rectangle 相交
         if (rect.intersects(tank.getRect())) {
             this.die();
@@ -123,14 +121,13 @@ public class Bullet extends GameObject {
             // 计算爆炸的位置
             int eX = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
             int eY = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
-            // gm.add(new Explode(eX,eY,gm));
             GameModel.getInstance().add(new Explode(eX,eY));
             return true;
         }
         return false;
     }
 
-    private void die() {
+    public void die() {
         this.living = false;
     }
 }

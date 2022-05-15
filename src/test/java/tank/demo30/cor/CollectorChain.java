@@ -21,6 +21,11 @@ public class CollectorChain implements Collider {
     public CollectorChain() {
         add(new BulletTankCollider());
         add(new TankTankCollider());
+        add(new TankWallCollider());
+        add(new BulletWallCollider());
+        add(new BulletSteelCollider());
+        add(new TankSteelCollider());
+        add(new TankWaterCollider());
     }
 
     public void add(Collider collider) {

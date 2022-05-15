@@ -1,12 +1,16 @@
 package tank.demo30.mediator;
 
+import lombok.Getter;
+
 import java.awt.*;
+import java.io.Serializable;
 
 /**
  * @author zhangling
  * @date 2022/5/10 6:44 下午
  */
-public abstract class GameObject {
+@Getter
+public abstract class GameObject implements Serializable {
 
     protected int x, y;
 

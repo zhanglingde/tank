@@ -28,7 +28,8 @@ public class Tank extends GameObject {
     // 初始位置
     private int x = 200;
     private int y = 200;
-
+    int oldX;
+    int oldY;
     public static int WIDTH = ResourceMgr.goodTankU.getWidth();
     public static int HEIGHT = ResourceMgr.goodTankU.getHeight();
 
@@ -49,12 +50,12 @@ public class Tank extends GameObject {
     private Rectangle rect = new Rectangle();
 
 
-    public Tank(int x, int y, Dir dir, Group group) {
+    public Tank(int x, int y, Dir dir, Group group,boolean moving) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        // this.gm = gm;
         this.group = group;
+        this.moving = moving;
 
         rect.x = x;
         rect.y = y;
@@ -72,11 +73,8 @@ public class Tank extends GameObject {
         // 坦克死亡移除
         if (!living) {
             if (group == Group.BAD) {
-                // gm.getBadTanks().remove(this);
-                // gm.remove(this);
                 GameModel.getInstance().remove(this);
             } else {
-                // gm.setMyTank(null);
                 GameModel.getInstance().setMyTank(null);
             }
         }
@@ -105,6 +103,8 @@ public class Tank extends GameObject {
      * 坦克移动
      */
     private void move() {
+        oldX = x;
+        oldY = y;
         if (moving) {
             switch (dir) {
                 case LEFT:
@@ -148,7 +148,7 @@ public class Tank extends GameObject {
         this.living = false;
     }
 
-    private void boundsCheck() {
+    public void boundsCheck() {
         if (x < 2) {
             x = 2;
         }
@@ -164,9 +164,31 @@ public class Tank extends GameObject {
         }
     }
 
+    public void colliderCheck(){
+        switch (dir) {
+            case LEFT:
+                x -= SPEED;
+                break;
+            case UP:
+                y -= SPEED;
+                break;
+            case RIGHT:
+                x += SPEED;
+                break;
+            case DOWN:
+                y += SPEED;
+                break;
+        }
+    }
+
     public void randomDir() {
         // 从方向枚举数组的4个方向中，随机取一个方向的下标
         this.dir = Dir.values()[random.nextInt(4)];
+    }
+
+    public void back() {
+        x = oldX;
+        y = oldY;
     }
 }
 
