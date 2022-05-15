@@ -1,5 +1,6 @@
 
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
