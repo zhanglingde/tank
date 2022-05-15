@@ -12,7 +12,7 @@ public class ResourceMgr {
     public static BufferedImage goodTankL, goodTankU, goodTankR, goodTankD;
     public static BufferedImage badTankL, badTankU, badTankR, badTankD;
     public static BufferedImage bulletL2, bulletU2, bulletR2, bulletD2;
-    public static BufferedImage wall,water,home,steel,quarterWall,grass;
+    public static BufferedImage wall, water, home, steel, quarterWall, grass;
     // 爆炸图片数组
     public static BufferedImage[] explodes = new BufferedImage[16];
     public static BufferedImage[] explodes2 = new BufferedImage[10];
@@ -39,7 +39,6 @@ public class ResourceMgr {
             bulletD = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletD.gif"));
 
 
-
             bulletU2 = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletU.png"));
             bulletR2 = ImageUtil.rotateImage(bulletU2, 90);
             bulletD2 = ImageUtil.rotateImage(bulletU2, 180);
@@ -57,7 +56,7 @@ public class ResourceMgr {
                 explodes[i] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/e" + (i + 1) + ".gif"));
             }
             for (int i = 0; i < explodes2.length; i++) {
-                explodes2[i] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/" + i + ".gif"));
+                explodes2[i] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/exp" + i + ".gif"));
             }
         } catch (Exception e) {
             e.printStackTrace();

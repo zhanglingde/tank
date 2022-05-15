@@ -8,8 +8,8 @@ import java.awt.*;
 
 public class Explode2 extends GameObject {
 
-    public static final int WIDTH = ResourceMgr.explodes[0].getWidth();
-    public static final int HEIGHT = ResourceMgr.explodes[0].getHeight();
+    public static final int WIDTH = ResourceMgr.explodes2[0].getWidth();
+    public static final int HEIGHT = ResourceMgr.explodes2[0].getHeight();
 
     private int x, y;
     private boolean living = true;
@@ -27,9 +27,9 @@ public class Explode2 extends GameObject {
 
     public void paint(Graphics g){
 
-        g.drawImage(ResourceMgr.explodes[step++],x,y,null);
+        g.drawImage(ResourceMgr.explodes2[step++],x,y,null);
 
-        if(step >= ResourceMgr.explodes.length){
+        if(step >= ResourceMgr.explodes2.length){
             GameModel.getInstance().remove(this);
         }
     }

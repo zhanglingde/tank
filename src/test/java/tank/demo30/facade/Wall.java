@@ -11,8 +11,8 @@ import java.awt.*;
 @Setter
 public class Wall extends GameObject {
 
-    int width = ResourceMgr.wall.getWidth();
-    int height = ResourceMgr.wall.getHeight();
+    public int width = ResourceMgr.wall.getWidth();
+    public int height = ResourceMgr.wall.getHeight();
     public Rectangle rect;
 
     public Wall(int x, int y) {

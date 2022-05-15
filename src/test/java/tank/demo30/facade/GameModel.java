@@ -55,7 +55,7 @@ public class GameModel {
         add(new Tank(0, 0, Dir.DOWN, Group.BAD, true));
         add(new Tank(360, 0, Dir.DOWN, Group.BAD, true));
         add(new Tank(720, 0, Dir.DOWN, Group.BAD, true));
-
+        add(new Explode2(100,100));
 
         MapUtil.pass2();
     }

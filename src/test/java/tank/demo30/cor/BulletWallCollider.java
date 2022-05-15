@@ -19,8 +19,8 @@ public class BulletWallCollider implements Collider {
             if (bullet.getRect().intersects(wall.getRect())) {
                 bullet.die();
                 GameModel.getInstance().remove(wall);
-                int eX = wall.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
-                int eY = wall.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
+                int eX = wall.getX() + wall.getWidth() / 2 - Explode2.WIDTH / 2;
+                int eY = wall.getY() + wall.getHeight() / 2 - Explode2.HEIGHT / 2;
                 GameModel.getInstance().add(new Explode2(eX,eY));
             }
         } else if (o1 instanceof Wall && o2 instanceof Bullet) {
