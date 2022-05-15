@@ -53,6 +53,7 @@ public class Bullet extends GameObject {
     public void paint(Graphics g) {
         if (!living) {
             GameModel.getInstance().remove(this);
+            return;
         }
 
         switch (dir) {

@@ -1,11 +1,8 @@
-package tank.demo21.decorator;
+package tank.demo22.decorator;
 
 
 
-import cn.hutool.core.io.resource.ResourceUtil;
-import tank.demo21.facade.Bullet;
-import tank.demo21.mediator.GameObject;
-import util.ResourceMgr;
+import tank.demo22.mediator.GameObject;
 
 import java.awt.*;
 
