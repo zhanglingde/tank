@@ -1,9 +1,9 @@
-package tank.demo30.cor;
+package tank.demo40.cor;
 
 
-import tank.demo30.facade.Bullet;
-import tank.demo30.facade.Steel;
-import tank.demo30.mediator.GameObject;
+import tank.demo40.facade.Bullet;
+import tank.demo40.facade.Steel;
+import tank.demo40.mediator.GameObject;
 
 /**
  * 子弹墙碰撞器

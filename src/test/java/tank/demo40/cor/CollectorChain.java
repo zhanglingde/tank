@@ -1,10 +1,9 @@
-package tank.demo30.cor;
+package tank.demo40.cor;
 
 
 
 
-
-import tank.demo30.mediator.GameObject;
+import tank.demo40.mediator.GameObject;
 
 import java.util.ArrayList;
 import java.util.List;
