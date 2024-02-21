@@ -27,18 +27,18 @@ public class TankWaterCollider implements Collider {
                     switch (tank.getDir()) {
                         case LEFT:
                             tank.setX(water.getX() + water.getWidth());
-                            tank.setY(water.getY());
+                            // tank.setY(water.getY());
                             break;
                         case UP:
-                            tank.setX(water.getX());
+                            // tank.setX(water.getX());
                             tank.setY(water.getY() + water.getHeight());
                             break;
                         case RIGHT:
                             tank.setX(water.getX() - water.getWidth());
-                            tank.setY(water.getY());
+                            // tank.setY(water.getY());
                             break;
                         case DOWN:
-                            tank.setX(water.getX());
+                            // tank.setX(water.getX());
                             tank.setY(water.getY() - water.getHeight());
                             break;
                     }

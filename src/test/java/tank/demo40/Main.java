@@ -1,5 +1,7 @@
 package tank.demo40;
 
+import tank.demo40.net.Client;
+
 /**
  * 入口
  * @author zhangling
@@ -11,7 +13,7 @@ public class Main {
 
         new Thread(()-> new Audio("audio/game_start.wav").play()).start();
 
-
+        Client.INSTANCE.connect();
 
         while (true) {
             Thread.sleep(50);

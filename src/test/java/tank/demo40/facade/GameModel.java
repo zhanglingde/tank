@@ -9,7 +9,6 @@ import tank.demo40.cor.CollectorChain;
 import tank.demo40.mediator.GameObject;
 import tank.demo40.strategy.DefaultFireStrategy;
 import tank.demo40.strategy.FireStrategy;
-import util.MapUtil;
 
 import java.awt.*;
 import java.util.*;
