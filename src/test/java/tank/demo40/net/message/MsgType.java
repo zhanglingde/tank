@@ -6,5 +6,6 @@ public enum MsgType {
     TankStop,
     TankStartMoving,
     BulletNew,
-    TankDie
+    TankDie,
+    WallExplode
 }

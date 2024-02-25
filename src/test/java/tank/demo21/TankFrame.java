@@ -55,7 +55,7 @@ public class TankFrame extends Frame {
     @Override
     public void paint(Graphics g) {
         g.setColor(Color.WHITE);
-        g.drawString("对象个数：" + GameModel.getInstance().getObjects().size(), 50, 100);
+        // g.drawString("对象个数：" + GameModel.getInstance().getObjects().size(), 50, 100);
         GameModel.getInstance().paint(g);
     }
 

@@ -1,11 +1,11 @@
-package tank.demo21.facade;
+package tank.demo22.demo21.facade;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import tank.demo21.Dir;
-import tank.demo21.Group;
-import tank.demo21.TankFrame;
-import tank.demo21.mediator.GameObject;
+import tank.demo22.demo21.Dir;
+import tank.demo22.demo21.Group;
+import tank.demo22.demo21.TankFrame;
+import tank.demo22.demo21.mediator.GameObject;
 import util.ResourceMgr;
 
 import java.awt.*;

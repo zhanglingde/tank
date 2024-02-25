@@ -1,13 +1,10 @@
-package tank.demo21.strategy;
+package tank.demo22.demo21.strategy;
 
 
-import tank.demo21.Dir;
-import tank.demo21.decorator.BulletDecorator;
-import tank.demo21.decorator.RectDecorator;
-import tank.demo21.decorator.TailDecorator;
-import tank.demo21.facade.Bullet;
-import tank.demo21.facade.GameModel;
-import tank.demo21.facade.Tank;
+import tank.demo22.demo21.Dir;
+import tank.demo22.demo21.decorator.BulletDecorator;
+import tank.demo22.demo21.facade.Bullet;
+import tank.demo22.demo21.facade.Tank;
 
 /**
  * @author zhangling  2021/12/9 22:49

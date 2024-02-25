@@ -1,6 +1,8 @@
 package tank.demo40.net.message;
 
 
+import cn.hutool.json.JSON;
+import cn.hutool.json.JSONUtil;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -73,6 +75,7 @@ public class TankJoinMsg extends Msg{
      */
     @Override
     public byte[] toBytes() {
+        // return JSONUtil.toJsonStr(this).getBytes();
         ByteArrayOutputStream baos = null;
         DataOutputStream dos = null;
         byte[] bytes = null;
@@ -113,6 +116,17 @@ public class TankJoinMsg extends Msg{
 
     @Override
     public void parse(byte[] bytes) {
+
+        // TankJoinMsg bean = JSONUtil.toBean(new String(bytes), TankJoinMsg.class);
+        // this.x = bean.getX();
+        // this.y = bean.getY();
+        // this.dir = bean.getDir();
+        // this.moving = bean.isMoving();
+        // this.group = bean.getGroup();
+        // this.id = bean.getId();
+
+
+
         DataInputStream dis = new DataInputStream(new ByteArrayInputStream(bytes));
         try {
             // 先读取消息类型，根据 Type 信息处理不同的消息

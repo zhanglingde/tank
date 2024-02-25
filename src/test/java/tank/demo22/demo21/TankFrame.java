@@ -1,14 +1,11 @@
-package tank.demo40;
+package tank.demo22.demo21;
 
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import tank.demo40.facade.GameModel;
-import tank.demo40.facade.Tank;
-import tank.demo40.net.Client;
-import tank.demo40.net.message.TankStartMovingMsg;
-import tank.demo40.net.message.TankStopMsg;
+import tank.demo22.demo21.facade.GameModel;
+import tank.demo22.demo21.facade.Tank;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -28,8 +25,7 @@ import java.awt.event.WindowEvent;
 @Setter
 @AllArgsConstructor
 public class TankFrame extends Frame {
-    // 36
-    public static int GAME_WIDTH = 780, GAME_HEIGHT = 790;
+    public static int GAME_WIDTH = 1000, GAME_HEIGHT = 800;
 
     public TankFrame() {
         setTitle("tank war");
@@ -58,6 +54,8 @@ public class TankFrame extends Frame {
      */
     @Override
     public void paint(Graphics g) {
+        g.setColor(Color.WHITE);
+        // g.drawString("对象个数：" + GameModel.getInstance().getObjects().size(), 50, 100);
         GameModel.getInstance().paint(g);
     }
 
@@ -164,12 +162,8 @@ public class TankFrame extends Frame {
                 if (bD) {
                     myTank.setDir(Dir.DOWN);
                 }
-
-                // 发出坦克移动的消息
-                Client.INSTANCE.send(new TankStartMovingMsg(GameModel.getInstance().getMyTank()));
             } else {
                 myTank.setMoving(false);
-                Client.INSTANCE.send(new TankStopMsg(GameModel.getInstance().getMyTank()));
             }
         }
     }

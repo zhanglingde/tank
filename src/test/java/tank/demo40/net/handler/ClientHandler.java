@@ -23,7 +23,7 @@ public class ClientHandler extends SimpleChannelInboundHandler<Msg> {
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, Msg msg) throws Exception {
         // System.out.println("接收服务器消息。。。");
-        System.out.println("msg = " + msg);
+        // System.out.println("msg = " + msg);
         msg.handle();
     }
 

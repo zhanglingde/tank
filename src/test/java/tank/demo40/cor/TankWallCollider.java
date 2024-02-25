@@ -26,18 +26,18 @@ public class TankWallCollider implements Collider {
                     switch (tank.getDir()) {
                         case LEFT:
                             tank.setX(wall.getX() + wall.getWidth());
-                            tank.setY(wall.getY());
+                            // tank.setY(wall.getY());
                             break;
                         case UP:
-                            tank.setX(wall.getX());
+                            // tank.setX(wall.getX());
                             tank.setY(wall.getY() + wall.getHeight());
                             break;
                         case RIGHT:
                             tank.setX(wall.getX() - wall.getWidth());
-                            tank.setY(wall.getY());
+                            // tank.setY(wall.getY());
                             break;
                         case DOWN:
-                            tank.setX(wall.getX());
+                            // tank.setX(wall.getX());
                             tank.setY(wall.getY() - wall.getHeight());
                             break;
                     }

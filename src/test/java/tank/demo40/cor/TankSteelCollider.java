@@ -26,18 +26,18 @@ public class TankSteelCollider implements Collider {
                     switch (tank.getDir()) {
                         case LEFT:
                             tank.setX(steel.getX() + steel.getWidth());
-                            tank.setY(steel.getY());
+                            // tank.setY(steel.getY());
                             break;
                         case UP:
-                            tank.setX(steel.getX());
+                            // tank.setX(steel.getX());
                             tank.setY(steel.getY() + steel.getHeight());
                             break;
                         case RIGHT:
                             tank.setX(steel.getX() - steel.getWidth());
-                            tank.setY(steel.getY());
+                            // tank.setY(steel.getY());
                             break;
                         case DOWN:
-                            tank.setX(steel.getX());
+                            // tank.setX(steel.getX());
                             tank.setY(steel.getY() - steel.getHeight());
                             break;
                     }

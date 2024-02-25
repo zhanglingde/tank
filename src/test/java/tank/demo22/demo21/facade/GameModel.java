@@ -1,17 +1,17 @@
-package tank.demo40.facade;
+package tank.demo22.demo21.facade;
 
 
 import lombok.Getter;
 import lombok.Setter;
-import tank.demo40.Dir;
-import tank.demo40.Group;
-import tank.demo40.cor.CollectorChain;
-import tank.demo40.mediator.GameObject;
-import tank.demo40.strategy.DefaultFireStrategy;
-import tank.demo40.strategy.FireStrategy;
+import tank.demo22.demo21.Dir;
+import tank.demo22.demo21.Group;
+import tank.demo22.demo21.cor.CollectorChain;
+import tank.demo22.demo21.mediator.GameObject;
+import tank.demo22.demo21.strategy.FireStrategy;
+import tank.demo22.demo21.strategy.FourDirFireStrategy;
 
 import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,54 +23,52 @@ public class GameModel {
 
     private static final GameModel INSTANCE = new GameModel();
 
-    private Tank myTank;
+    private Tank myTank = new Tank(600, 400, Dir.UP, Group.GOOD);
     private List<GameObject> objects = new ArrayList<>();
     CollectorChain chain = new CollectorChain();
-    private Map<UUID, GameObject> objectMap = new HashMap<>();
 
 
     public void add(GameObject gameObject) {
         this.objects.add(gameObject);
-        objectMap.put(gameObject.getId(), gameObject);
-    }
-
-    public GameObject getByUUId(UUID uuid) {
-        return objectMap.get(uuid);
     }
 
     public void remove(GameObject gameObject) {
         this.objects.remove(gameObject);
     }
 
-    public static GameModel getInstance() {
+    public static GameModel getInstance(){
         return INSTANCE;
     }
 
 
 
-
-    FireStrategy fireStrategy = new DefaultFireStrategy();
-
-    static {
-        INSTANCE.init();
-    }
-
-    private void init() {
-        myTank = new Tank(240, 756, Dir.UP, Group.GOOD, false);
-        objects.add(myTank);
-        // 初始化敌方坦克
-        // add(new Tank(0, 0, Dir.DOWN, Group.BAD, true));
-        // add(new Tank(360, 0, Dir.DOWN, Group.BAD, true));
-        // add(new Tank(720, 0, Dir.DOWN, Group.BAD, true));
-        add(new Explode2(100,100));
-
-        MapUtil.pass2();
-    }
+    FireStrategy fireStrategy = new FourDirFireStrategy();
 
     public GameModel() {
+        objects.add(myTank);
+        // 初始化敌方坦克
+        for (int i = 0; i < 5; i++) {
+            add(new Tank(50 + (i * 100), 200, Dir.DOWN, Group.BAD));
+        }
+
+        add(new Wall(0,500));
+        add(new Wall(60,500));
+        add(new Wall(120,500));
+        add(new Wall(180,500));
+        add(new Wall(240,500));
+        add(new Wall(300,500));
+        add(new Wall(360,500));
+        add(new Wall(420,500));
+        add(new Wall(480,500));
+
+        add(new Wall(410, 736));
+        add(new Home(470, 736));
+        add(new Wall(530, 736));
+        add(new Wall(410, 676));
+        add(new Wall(470, 676));
+        add(new Wall(530, 676));
 
     }
-
 
     /**
      * 画出一个图形
@@ -80,6 +78,7 @@ public class GameModel {
     public void paint(Graphics g) {
 
         g.setColor(Color.WHITE);
+
         if (myTank != null) {
             myTank.paint(g);
         }
@@ -94,5 +93,6 @@ public class GameModel {
                 chain.collide(o1, o2);
             }
         }
+
     }
 }

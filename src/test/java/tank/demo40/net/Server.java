@@ -18,34 +18,38 @@ public class Server {
 
     public static ChannelGroup clients = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
 
-    public static void main(String[] args) throws Exception {
+    // public static void main(String[] args) throws Exception {
+    //
+    //     // 1. 启动器，负责组装 netty 组件，启动服务器
+    //     ChannelFuture channelFuture = new ServerBootstrap()
+    //             // 2.NioEventLoopGroup 参数一：负责客户端连接的线程池；参数二：负责客户端中 IO 事件的线程池
+    //             .group(new NioEventLoopGroup(1), new NioEventLoopGroup(2))
+    //             // 3. 服务器 ServerSocketChannel 的实现方式（NIO，BIO）
+    //             .channel(NioServerSocketChannel.class)
+    //             // 4. boss 负责处理客户端连接，worker(child)负责客户端读写，childHandler决定了 worker（child）能执行哪些操作（handler）
+    //             .childHandler(
+    //                     // 5. channel 代表和客户端进行数据读写的通道 Initializer 初始化，负责添加别的 handler
+    //                     new ChannelInitializer<NioSocketChannel>() {
+    //                         @Override
+    //                         protected void initChannel(NioSocketChannel ch) throws Exception {
+    //                             ch.pipeline().addLast(new StringDecoder());
+    //                             ch.pipeline().addLast(new SimpleChannelInboundHandler<String>() {
+    //                                 @Override
+    //                                 protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
+    //                                     System.out.println("msg = " + msg);
+    //                                 }
+    //                             });
+    //                         }
+    //                     })
+    //             .bind(8888);
+    //     channelFuture.sync();
+    //     // 异步关系
+    //     channelFuture.channel().closeFuture().sync();
+    //
+    // }
 
-        // 1. 启动器，负责组装 netty 组件，启动服务器
-        ChannelFuture channelFuture = new ServerBootstrap()
-                // 2.NioEventLoopGroup 参数一：负责客户端连接的线程池；参数二：负责客户端中 IO 事件的线程池
-                .group(new NioEventLoopGroup(1), new NioEventLoopGroup(2))
-                // 3. 服务器 ServerSocketChannel 的实现方式（NIO，BIO）
-                .channel(NioServerSocketChannel.class)
-                // 4. boss 负责处理客户端连接，worker(child)负责客户端读写，childHandler决定了 worker（child）能执行哪些操作（handler）
-                .childHandler(
-                        // 5. channel 代表和客户端进行数据读写的通道 Initializer 初始化，负责添加别的 handler
-                        new ChannelInitializer<NioSocketChannel>() {
-                            @Override
-                            protected void initChannel(NioSocketChannel ch) throws Exception {
-                                ch.pipeline().addLast(new StringDecoder());
-                                ch.pipeline().addLast(new SimpleChannelInboundHandler<String>() {
-                                    @Override
-                                    protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
-                                        System.out.println("msg = " + msg);
-                                    }
-                                });
-                            }
-                        })
-                .bind(8888);
-        channelFuture.sync();
-        // 异步关系
-        channelFuture.channel().closeFuture().sync();
-
+    public static void main(String[] args) {
+        new Server().serverStart();
     }
 
     /**

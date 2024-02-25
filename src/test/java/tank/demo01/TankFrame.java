@@ -18,7 +18,7 @@ import java.awt.event.WindowEvent;
  */
 @Data
 @AllArgsConstructor
-public class TankFrame extends Frame {
+public class  TankFrame extends Frame {
 
     private int x = 200;
     private int y = 200;

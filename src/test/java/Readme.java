@@ -52,7 +52,7 @@ public class Readme{
     void demo07() {}
 
     /**
-     * 初始化地方坦克 {}
+     * 初始化敌方坦克 {}
      */
     void demo08(){}
 
